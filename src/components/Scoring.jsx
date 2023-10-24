@@ -10,6 +10,19 @@ function Scoring() {
     const [talent, setTalent] = useState(0)
     const [presentation, setPresentation] = useState(0)
     const [toggle, setToggle] = useState(false)
+    const [poise, setPoise] = useState(10)
+    const [score, setScore] = useState(0)
+
+    useEffect(() => {
+        setScore(parseInt(talent) + parseInt(presentation) + parseInt(poise))
+    }, [talent, presentation, poise])
+
+    useEffect(() => {
+        if (poise > 50) {
+            alert('Poise score cannot be more than 50')
+            setPoise(0)
+        }
+    }, [poise])
 
     useEffect(() => {
         async function fetchData() {
@@ -48,7 +61,14 @@ function Scoring() {
             Score: presentation,
             Category: 'Presentation'
         }
-        const recordpresent = await pb.collection('Scores').create(dataspresent)
+        const recordpoise = await pb.collection('Scores').create(dataspresent)
+        const dataspoise = {
+            judge_name: localStorage.getItem('judge'),
+            Candidate: candidateData.id,
+            Score: presentation,
+            Category: 'Poise'
+        }
+        const recordpresent = await pb.collection('Scores').create(dataspoise)
         setToggle(!toggle)
     }
 
@@ -103,6 +123,14 @@ function Scoring() {
                                 <label for="presentation">10</label>
                             </form>
                         </div>
+                        <div className='w-[50%] h-auto'>
+                            <h3 className='text-3xl p-5'>Poise</h3>
+                            <form onChange={(e) => setPresentation(e.target.value)} className='text-xl font-bold flex gap-4' >
+                                <label for="poise">Poise</label>
+                                <input type="number" onChange={(e) => setPoise(e.target.value)} />
+                                <input className='w-[10rem]' value={poise} type="range" min="0" max="50" onChange={(e) => setPoise(e.target.value)} />
+                            </form>
+                        </div>
                         {toggle && (
                             <>
                                 <div className='absolute w-[50vw] h-[40vh] top-10 bg-white z-10'>
@@ -119,6 +147,7 @@ function Scoring() {
                                 </div>
                             </>
                         )}
+                        <h1 className='text-3xl'>Final Score: {score}</h1>
                         <button onClick={() => confirmScore()} className='w-[30%] h-20 rounded-2xl font-bold text-xl bg-white text-black'>Submit</button>
                     </div>
                 </div>
