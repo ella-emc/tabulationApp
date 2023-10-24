@@ -1,8 +1,8 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { pb } from '../pocketbase'
-import { useStore } from '@nanostores/react'
-import { judgeIsLogin } from '../stores/judgeLog'
+
+
 
 function Judge() {
     const ref = useRef(null)
@@ -10,7 +10,6 @@ function Judge() {
     const [toggle, setToggle] = useState(false)
     const [data, setData] = useState()
     const [disable, setDisable] = useState(false)
-    const $judgeIsLogin = useStore(judgeIsLogin)
 
 
     useEffect(() => {
