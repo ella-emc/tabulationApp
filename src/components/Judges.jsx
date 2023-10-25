@@ -1,96 +1,88 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { pb } from '../pocketbase'
+import toast, { Toaster } from 'react-hot-toast';
+import eventsource from 'eventsource'
+
+
 
 
 
 function Judge() {
-    const ref = useRef(null)
-    const [value, setValue] = useState('Ella')
-    const [toggle, setToggle] = useState(false)
-    const [data, setData] = useState()
-    const [disable, setDisable] = useState(false)
+    const [key, setKey] = useState('')
+    const [lock, setLock] = useState(false)
+    const [data, setData] = useState([])
 
+
+    global.EventSource = eventsource;
 
     useEffect(() => {
-        async function fetchData() {
-            const record = await pb.collection('Judges').getFullList();
-            console.log(record)
-            setData(record)
-            setValue(record[0].id)
+        pb.collection('ControlUnlock').subscribe('*', function (e) {
+            setLock(e.record.viewunlock)
+            console.log(e.record.viewunlock);
+        });
+    }, [])
+
+    useEffect(() => {
+        async function LoginFetch() {
+            const res = await pb.collection('Judges').getFullList()
+            console.log(res);
+            setData(res)
         }
-        fetchData()
+        LoginFetch()
     }, [])
 
 
+    // useEffect(() => {
+    //     pb.collection('Judges').subscribe('*', function (e) {
 
-    const handleSubmit = async () => {
-        setDisable(true)
-        const data = await pb.collection('Judges').getOne(value)
-        if (data.LoggedIn === true) {
-            alert('Judge already logged in')
-            setToggle(!toggle)
-            setDisable(false)
-            return
-        } else {
-            await pb.collection('Judges').update(value, { LoggedIn: true })
-            localStorage.setItem('judge', value)
-            console.log(value)
-            setToggle(!toggle)
-            window.location.href = '/scoring'
+    //         console.log(e.record);
+    //         toast(`${e.record.Name} has been logged in`)
+    //     });
+
+    // }, [])
+
+    async function Login() {
+        toast.loading('Logging in')
+        try {
+            const main = data ? data.filter((item) => item.secretkey === key)[0].id : false;
+            const loggedin = await pb.collection('Judges').getOne(main)
+            console.log(main)
+            if (loggedin.loggedin === true) {
+                toast.dismiss()
+                toast.error('Already logged in')
+            } else if (main) {
+                localStorage.setItem('judge', main)
+                toast.dismiss()
+                toast.success('Logged in')
+                await pb.collection('Judges').update(data.filter((item) => item.secretkey === key)[0].id, { loggedin: true })
+                window.location.href = '/scoring'
+            }
+        } catch (error) {
+            toast.dismiss()
+            toast.error('Wrong key')
         }
     }
 
     return (
-        <div className="w-screen h-screen bg-blue-200 flex justify-center items-center">
-            <div
-                className="w-[70vw] h-[80vh] bg-white rounded-2xl flex flex-col justify-center items-center list-none font-bold gap-10"
-            >
-                <p className="text-4xl">Select Judge</p>
-                <form className="p-5">
-                    <select
-                        ref={ref}
-                        name="judge"
-                        id="judge"
-                        className="rounded-xl p-6 text-2xl border-2"
-                        onChange={() => setValue(ref.current.value)}
-                    >
-                        {data ? data.map((item, i) => (
-                            <option key={i} value={item.id}>{item.Name}</option>
-                        )) : (
-                            <option> Loading...</option>
-                        )}
-                    </select>
-
-                </form>
-                <button
-                    onClick={() => setToggle(!toggle)}
-                    disabled={!data}
-                    className="bg-blue-500 rounded-xl p-6 text-2xl text-white disabled:opacity-10">Submit</button
-                >
+        <>
+            {lock &&
+                (<div className="w-screen h-screen absolute flex justify-center items-center">
+                    <h1 className="text-5xl text-white font-bold absolute z-10">Please wait for the admin to unlock</h1>
+                    <div className="w-screen h-screen absolute blur-lg">
+                        <div className="w-full h-full bg-black opacity-60"></div>
+                    </div>
+                </div>)}
+            <Toaster />
+            <div className='flex w-screen h-screen justify-center items-center bg-blue-400'>
+                <div className='flex flex-col items-center justify-center p-10 gap-10 w-[80vw] h-[70vh] bg-white rounded-2xl'>
+                    <h1 className='text-3xl font-bold uppercase'>Enter the key</h1>
+                    <input onChange={(e) => setKey(e.target.value)} className='w-[50vw] h-[10vh] border-4 border-black rounded-2xl text-5xl' type="password" required={true} />
+                    <p className='opacity-20'>{key}</p>
+                    <button onClick={() => Login()} className='w-[20vw] h-[10vh] bg-blue-400 text-white text-4xl font-bold rounded-2xl hover:opacity-80'>Submit</button>
+                </div>
             </div>
-            {
-                toggle && (
-                    <>
-                        <div className='absolute w-screen h-screen bg-black opacity-25'>
-                        </div>
-                        <div className='w-[50vw] h-[30vh] flex flex-col gap-5 justify-center items-center absolute top-10 bg-gray-200 rounded-2xl opacity-100'>
-                            <h2 className='text-4xl'>Are you sure with this information?</h2>
-                            <p className='text-3xl'>Judge: {value}</p>
-                            <div className='flex gap-5'>
-                                <button
-                                    onClick={() => handleSubmit()}
-                                    disabled={disable}
-                                    className='bg-blue-500 rounded-xl p-6 text-2xl text-white disabled:opacity-50'>{disable ? "Loading" : "Yes"}</button>
-                                <button
-                                    onClick={() => setToggle(!toggle)}
-                                    className='bg-red-500 rounded-xl p-6 text-2xl text-white'>No</button>
-                            </div>
-                        </div>
-                    </>
-                )
-            }
-        </div >
+        </>
     )
 }
 
