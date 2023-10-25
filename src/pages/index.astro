@@ -1,28 +1,8 @@
 ---
+import HomeMenu from "../components/HomeMenu";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Welcome to Astro.">
-  <div class="w-screen h-screen bg-blue-200 flex justify-center items-center">
-    <div
-      class="w-[70vw] h-[80vh] bg-white rounded-2xl flex flex-col justify-center items-center list-none font-bold gap-10"
-    >
-      <a
-        class="border-2 p-10 w-60 text-center uppercase text-2xl rounded-2xl"
-        href="/judges"
-      >
-        <li>judges</li>
-      </a><a
-        class="border-2 p-10 w-60 text-center uppercase text-2xl rounded-2xl"
-        href="Admin"
-      >
-        <li>Admin</li>
-      </a><a
-        class="border-2 p-10 w-60 text-center uppercase text-2xl rounded-2xl"
-        href="Results"
-      >
-        <li>Results</li>
-      </a>
-    </div>
-  </div>
+  <HomeMenu client:load />
 </Layout>
