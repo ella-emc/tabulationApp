@@ -123,7 +123,7 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum }) {
 
                         <input className={`border-2 relative p-3 text-md font-bold rounded-3xl ${errors.talentimpact && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Impact 0-10%' {...register("talentimpact", { required: true, max: 10, min: 0, maxLength: 2 })} />
 
-                        {submit === false && confirm === false ? (<button onClick={beforeSubmit} className='p-10 rounded-full bg-blue-400 text-2xl font-bold text-white cursor-pointer hover:bg-blue-300'>Submit</button>) : (<input className={`p-10 rounded-full bg-red-400 text-2xl font-bold text-white cursor-pointer hover:bg-red-300 ${loading && "animate-spin"}`} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("talentperformance")) + parseInt(watch("talentmaterial")) + parseInt(watch("talentimpact"))}%`} />)}
+                        {submit === false && confirm === false ? (<button onClick={beforeSubmit} className='p-10 rounded-full bg-blue-400 text-2xl font-bold text-white cursor-pointer hover:bg-blue-300'>Submit</button>) : (<input className={`p-10 rounded-full bg-red-400 text-2xl font-bold text-white cursor-pointer hover:bg-red-300 ${loading && "animate-spin"}`} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("talentperformance") || 0) + parseInt(watch("talentmaterial") || 0) + parseInt(watch("talentimpact") || 0)}%`} />)}
                     </form>
                 ) : topic === 'swimwear' ? (
                     <div className='flex gap-5'>
