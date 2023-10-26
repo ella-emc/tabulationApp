@@ -10,10 +10,10 @@ function HomeMenu() {
                 >
                     <h1 className="text-3xl font-bold">Select the event</h1>
                     <div className="flex gap-10">
-                        <h2 onClick={() => setPicked("closed")} className={`text-2xl font-bold p-10 border-2 rounded-xl ${picked === "closed" && "border-blue-600"}`}>
+                        <h2 onClick={() => setPicked("closed")} className={`text-2xl font-bold p-10 border-2 rounded-xl ${picked === "closed" && "border-blue-600"} cursor-pointer hover:bg-blue-100`}>
                             Closed Event
                         </h2>
-                        <h2 onClick={() => setPicked("coronation")} className={`text-2xl font-bold p-10 border-2 rounded-xl ${picked === "coronation" && "border-blue-600"}`}>
+                        <h2 onClick={() => setPicked("coronation")} className={`text-2xl font-bold p-10 border-2 rounded-xl ${picked === "coronation" && "border-blue-600"} cursor-pointer hover:bg-blue-100`}>
                             Coronation Night
                         </h2>
                     </div>
@@ -22,12 +22,12 @@ function HomeMenu() {
                             <h1 className='text-3xl font-bold'>Pick the interface</h1>
                             <div className='flex gap-10'>
                                 <a href="/judges">
-                                    <div className='border-2 p-10 w-60 text-center uppercase text-2xl rounded-2xl'>
+                                    <div className='border-2 p-10 w-60 text-center uppercase text-2xl rounded-2xl cursor-pointer hover:bg-blue-100'>
                                         Judges
                                     </div>
                                 </a>
-                                <a href="/view">
-                                    <div className='border-2 p-10 w-60 text-center uppercase text-2xl rounded-2xl'>
+                                <a href="/adminview">
+                                    <div className='border-2 p-10 w-60 text-center uppercase text-2xl rounded-2xl cursor-pointer hover:bg-blue-100'>
                                         Admin
                                     </div>
                                 </a>

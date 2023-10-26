@@ -1,0 +1,10 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Dashboard from "../../../components/Dashboard";
+---
+
+<Layout title="Welcome to Admin panel">
+  <div class="flex w-screen h-screen justify-center items-center bg-blue-300">
+    <Dashboard client:only />
+  </div>
+</Layout>

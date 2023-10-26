@@ -1,0 +1,10 @@
+---
+import AdminView from "../../components/AdminView";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Admin View">
+  <div class="w-screen h-screen bg-blue-200 flex justify-center items-center">
+    <AdminView client:only />
+  </div>
+</Layout>

@@ -10,7 +10,7 @@ import eventsource from 'eventsource'
 
 function Judge() {
     const [key, setKey] = useState('')
-    const [lock, setLock] = useState(false)
+    const [lock, setLock] = useState(true)
     const [data, setData] = useState([])
 
 
