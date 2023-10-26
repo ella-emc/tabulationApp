@@ -108,16 +108,16 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum }) {
                 <h3>{candidate}</h3>
                 <h3>{candidateId}</h3>
             </div>
-            {localStorage.getItem('submitTalent') === 'true' && localStorage.getItem(topic + candidateNum) === candidateId ? (<div>Submitted</div>) : (<div className='flex gap-4'>
+            {localStorage.getItem('judge') === judge && localStorage.getItem(topic + candidateNum) === candidateId ? (<div>Submitted</div>) : (<div className='flex gap-4'>
                 {topic === 'talent' ? (
                     <form onSubmit={handleSubmit(submitScore)} className='flex gap-5'>
-                        <input className={`border-2 relative p-3 text-md font-bold rounded-3xl ${errors.talentperformance && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Performance' {...register("talentperformance", { required: true, max: 50, min: 0, maxLength: 2 })} />
+                        <input className={`border-2 relative p-3 text-md font-bold rounded-3xl ${errors.talentperformance && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Performance 0 - 60%' {...register("talentperformance", { required: true, max: 60, min: 0, maxLength: 2 })} />
 
-                        <input className={`border-2 relative p-3 text-md font-bold rounded-3xl ${errors.talentmaterial && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Performance' {...register("talentmaterial", { required: true, max: 50, min: 0, maxLength: 2 })} />
+                        <input className={`border-2 relative p-3 text-md font-bold rounded-3xl ${errors.talentmaterial && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Material 0 - 30%' {...register("talentmaterial", { required: true, max: 30, min: 0, maxLength: 2 })} />
 
-                        <input className={`border-2 relative p-3 text-md font-bold rounded-3xl ${errors.talentimpact && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Performance' {...register("talentimpact", { required: true, max: 50, min: 0, maxLength: 2 })} />
+                        <input className={`border-2 relative p-3 text-md font-bold rounded-3xl ${errors.talentimpact && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Impact 0-10%' {...register("talentimpact", { required: true, max: 10, min: 0, maxLength: 2 })} />
 
-                        {submit === false && confirm === false ? (<button onClick={beforeSubmit} className='p-10 rounded-full bg-blue-400 text-2xl font-bold text-white cursor-pointer hover:bg-blue-300'>Submit</button>) : (<input className={`p-10 rounded-full bg-red-400 text-2xl font-bold text-white cursor-pointer hover:bg-red-300 ${loading && "animate-spin"}`} type="submit" value={loading ? "C" : "Confirm?"} />)}
+                        {submit === false && confirm === false ? (<button onClick={beforeSubmit} className='p-10 rounded-full bg-blue-400 text-2xl font-bold text-white cursor-pointer hover:bg-blue-300'>Submit</button>) : (<input className={`p-10 rounded-full bg-red-400 text-2xl font-bold text-white cursor-pointer hover:bg-red-300 ${loading && "animate-spin"}`} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("talentperformance")) + parseInt(watch("talentmaterial")) + parseInt(watch("talentimpact"))}%`} />)}
                     </form>
                 ) : topic === 'swimwear' ? (
                     <div className='flex gap-5'>
