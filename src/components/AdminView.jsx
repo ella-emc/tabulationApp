@@ -19,10 +19,14 @@ function AdminView() {
                 if (dat === "not found") {
                     toast.dismiss()
                     toast.error("Account not found")
+                } else if (dat.loggedIn === true) {
+                    toast.dismiss()
+                    toast.error("Account already logged in")
                 } else {
                     toast.dismiss()
                     toast.success("Account found")
                     localStorage.setItem("admin", dat.id)
+                    await pb.collection('Admin').update(dat.id, { loggedIn: true })
                     window.location.href = "/adminview/dashboard"
                 }
             } catch (error) {

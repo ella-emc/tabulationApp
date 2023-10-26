@@ -13,6 +13,12 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum }) {
     const [confirm, setConfirm] = useState(false)
     const [loading, setLoading] = useState(false)
 
+    useEffect(() => {
+        if (localStorage.getItem('judge') === null) {
+            window.location.href = '/'
+        }
+    }, [])
+
     const onSubmit = data => {
         setTalent({ performance: data.talentperformance, material: data.talentmaterial, impact: data.talentimpact })
         console.log(data)
