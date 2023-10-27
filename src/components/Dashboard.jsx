@@ -6,11 +6,22 @@ function Dashboard() {
     const [toggle, setToggle] = React.useState(false)
     const [loading, setLoading] = React.useState(false)
     const [topic, setTopic] = React.useState('talent')
+    const [judge, setJudge] = React.useState([])
+    const [pickedJudge, setPickedJudge] = React.useState('')
 
     useEffect(() => {
         if (localStorage.getItem('admin') === null) {
             window.location.href = '/adminview'
         }
+        async function getJudge() {
+            try {
+                const res = await pb.collection('Judges').getFullList()
+                setJudge(res)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getJudge()
     }, [])
 
     async function getToggle() {
@@ -51,9 +62,14 @@ function Dashboard() {
                     <option value="formal">Formal</option>
                     <option value="question">Question</option>
                 </select>
+                <select onChange={(e) => setPickedJudge(e.target.value)} className='bg-blue-100 w-40 text-2xl font-bold rounded-xl text-center' name="topic" id="topic">
+                    {judge.map((item, index) => (
+                        <option key={index} value={item.id}>{item.Name}</option>
+                    ))}
+                </select>
             </div>
             <div className='flex w-full h-3/4 bg-gray-200'>
-                <AdminTable topic={topic} />
+                <AdminTable topic={topic} judgeId={pickedJudge} />
             </div>
         </div>
     )
