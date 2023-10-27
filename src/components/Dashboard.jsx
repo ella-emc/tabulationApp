@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { pb } from '../pocketbase.js'
+import AdminTable from './AdminTable.jsx'
 
 function Dashboard() {
     const [toggle, setToggle] = React.useState(false)
     const [loading, setLoading] = React.useState(false)
+    const [topic, setTopic] = React.useState('talent')
+
+    useEffect(() => {
+        if (localStorage.getItem('admin') === null) {
+            window.location.href = '/adminview'
+        }
+    }, [])
 
     async function getToggle() {
         try {
@@ -20,6 +28,7 @@ function Dashboard() {
     async function getTopic(ev) {
         try {
             const res = await pb.collection('Topic').update('l1qoc0mlnovtslm', { topic: ev })
+            setTopic(ev)
             console.log(res)
         } catch (error) {
             console.log(error)
@@ -27,7 +36,7 @@ function Dashboard() {
     }
 
     return (
-        <div className="flex flex-col gap-10 w-[80vw] h-[80vh] justify-center items-center bg-white rounded-3xl">
+        <div className="flex overflow-hidden flex-col gap-10 w-[80vw] h-[80vh] justify-center items-center bg-white rounded-3xl">
             <h1 className="text-4xl font-bold uppercase">Dashboard</h1>
             <div className='flex gap-10'>
                 <div onClick={getToggle} className={`w-40 h-20 cursor-pointer rounded-full border-2 border-black flex items-center transition-all`}>
@@ -42,6 +51,9 @@ function Dashboard() {
                     <option value="formal">Formal</option>
                     <option value="question">Question</option>
                 </select>
+            </div>
+            <div className='flex w-full h-3/4 bg-gray-200'>
+                <AdminTable topic={topic} />
             </div>
         </div>
     )
