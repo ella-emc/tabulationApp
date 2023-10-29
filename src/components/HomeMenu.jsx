@@ -11,7 +11,7 @@ function HomeMenu() {
                     <h1 className="text-3xl font-bold">Select the event</h1>
                     <div className="flex gap-10">
                         <h2 onClick={() => setPicked("closed")} className={`text-2xl font-bold p-10 border-2 rounded-xl ${picked === "closed" && "border-blue-600"} cursor-pointer hover:bg-blue-100`}>
-                            Closed Event
+                            Closed-Door Interview
                         </h2>
                         <h2 onClick={() => setPicked("coronation")} className={`text-2xl font-bold p-10 border-2 rounded-xl ${picked === "coronation" && "border-blue-600"} cursor-pointer hover:bg-blue-100`}>
                             Coronation Night
