@@ -5,7 +5,7 @@ import AdminTable from './AdminTable.jsx'
 function Dashboard() {
     const [toggle, setToggle] = React.useState(false)
     const [loading, setLoading] = React.useState(false)
-    const [topic, setTopic] = React.useState('talent')
+    const [topic, setTopic] = React.useState('swimwear')
     const [judge, setJudge] = React.useState([])
     const [pickedJudge, setPickedJudge] = React.useState('')
 
