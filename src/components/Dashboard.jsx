@@ -56,11 +56,9 @@ function Dashboard() {
                     </div>
                 </div>
                 <select onChange={(e) => getTopic(e.target.value)} className='bg-blue-100 w-40 text-2xl font-bold rounded-xl text-center' name="topic" id="topic">
-                    <option value="talent">Talent</option>
-                    <option value="swimwear">Swimwear</option>
-                    <option value="press">Press</option>
-                    <option value="formal">Formal</option>
-                    <option value="question">Question</option>
+                    <option value="swimwear">Swimwear Competition</option>
+                    <option value="formal">Formal Attire</option>
+                    <option value="question">Question and Answer</option>
                 </select>
                 <select onChange={(e) => setPickedJudge(e.target.value)} className='bg-blue-100 w-40 text-2xl font-bold rounded-xl text-center' name="topic" id="topic">
                     {judge.map((item, index) => (
