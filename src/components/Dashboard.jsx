@@ -55,7 +55,7 @@ function Dashboard() {
                         {loading ? (<h1 className='font-bold text-3xl animate-spin'>C</h1>) : toggle ? (<h1 className='font-bold text-3xl'>X</h1>) : (<h1 className='font-bold text-3xl'>O</h1>)}
                     </div>
                 </div>
-                <select onChange={(e) => getTopic(e.target.value)} className='bg-blue-100 w-40 text-2xl font-bold rounded-xl text-center' name="topic" id="topic">
+                <select onChange={(e) => getTopic(e.target.value)} className='bg-blue-100 px-4 w-auto text-2xl font-bold rounded-xl text-center' name="topic" id="topic">
                     <option value="swimwear">Swimwear Competition</option>
                     <option value="formal">Formal Attire</option>
                     <option value="question">Question and Answer</option>
