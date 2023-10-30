@@ -87,8 +87,8 @@ function Scoring() {
 
                         {topics === 'swimwear' ? (
                             <tr className='flex gap-20'>
-                                <th>Candidates</th>
-                                <th>Scores</th>
+                                <th className='mr-8'>Candidates</th>
+                                {/* <th>Scores</th> */}
                                 <th>Beauty of Figure</th>
                                 <th>Stage Presence</th>
                                 <th>Poise and Bearing</th>
@@ -96,16 +96,16 @@ function Scoring() {
 
                         ) : topics === 'formal' ? (
                             <tr className='flex gap-20'>
-                                <th>Candidates</th>
-                                <th>Scores</th>
+                                <th className='mr-8'>Candidates</th>
+                                {/* <th>Scores</th> */}
                                 <th>Attire and Carriage</th>
                                 <th>Stage Presence</th>
                                 <th>Poise and Bearing</th>
                             </tr>
                         ) : topics === 'question' ? (
                             <tr className='flex gap-20'>
-                                <th>Candidates</th>
-                                <th>Scores</th>
+                                <th className='mr-8'>Candidates</th>
+                                {/* <th>Scores</th> */}
                                 <th>Intelligence</th>
                                 <th>Poise and Personality</th>
                             </tr>
@@ -116,7 +116,7 @@ function Scoring() {
                     <tbody>
                         {data.map((dat) => (
                             <tr key={dat.id} className='font-italic items-center uppercase flex gap-5'>
-                                <td className='font-semibold'>{dat.nameId}</td>
+                                <td className='font-semibold mr-5'>{dat.nameId}</td>
                                 {/* <td onClick={() => setSubmitScore(true)} className='text-center font bold bg-blue-400 rounded-2xl px-4 py-2 font-bold text-white'>Submit Scores</td> */}
                                 <td>
                                     <ScoreLine candidateGender={dat.gender} prevScore={prevScore} topic={topics} candidate={dat.Name} candidateNum={dat.nameId} candidateId={dat.id} judge={localStorage.getItem('judge')} />
