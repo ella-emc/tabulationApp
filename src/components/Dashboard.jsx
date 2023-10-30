@@ -66,7 +66,7 @@ function Dashboard() {
                     ))}
                 </select>
             </div>
-            <div className='flex w-full h-3/4 bg-gray-200'>
+            <div className='flex w-full h-3/4 bg-gray-200 overflow-scroll'>
                 <AdminTable topic={topic} judgeId={pickedJudge} />
             </div>
         </div>
