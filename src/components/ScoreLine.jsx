@@ -69,6 +69,13 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
         setSubmit(true)
         localStorage.setItem(topic + candidateNum + candidateGender, candidateId)
         localStorage.setItem(topic + candidateNum + candidateGender + 'score', data.talentperformance + " " + data.talentmaterial + " " + data.talentimpact)
+        if (topic === 'swimwear') {
+            localStorage.setItem(topic + candidateNum + candidateGender + 'score', data.swimwearbeauty + " " + data.swimwearpresence + " " + data.swimwearpoise)
+        } else if (topic === 'formal') {
+            localStorage.setItem(topic + candidateNum + candidateGender + 'score', data.formalattire + " " + data.formalpresence + " " + data.formalpoise)
+        } else if (topic === 'question') {
+            localStorage.setItem(topic + candidateNum + candidateGender + 'score', data.questionintelligence + " " + data.questionpoise)
+        }
 
     }
 
@@ -78,28 +85,28 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
      */
     async function submitScore(data) {
         try {
-            if (topic === 'talent') {
+            if (topic === 'swimwear') {
                 try {
                     setLoading(true)
                     onSubmit(data)
                     await pb.collection('Scores').create({
                         topic: topic,
-                        subtopic: "performance",
-                        score: data.talentperformance,
+                        subtopic: "beauty",
+                        score: data.swimwearbeauty,
                         judge: judge,
                         candidate: candidateId
                     })
                     await pb.collection('Scores').create({
                         topic: topic,
                         subtopic: "material",
-                        score: data.talentmaterial,
+                        score: data.swimwearpresence,
                         judge: judge,
                         candidate: candidateId
                     })
                     await pb.collection('Scores').create({
                         topic: topic,
                         subtopic: "impact",
-                        score: data.talentimpact,
+                        score: data.swimwearpoise,
                         judge: judge,
                         candidate: candidateId
                     })
@@ -109,41 +116,61 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
                     console.log(error);
                     setLoading(false)
                 }
-            } else if (topic === 'swimwear') {
-                await pb.collection('Scores').create({
-                    topic: topic,
-                    beauty: swimwear.beauty,
-                    presence: swimwear.presence,
-                    poise: swimwear.poise,
-                    judge: judge,
-                    candidate: candidateId
-                })
-            } else if (topic === 'press') {
-                await pb.collection('Scores').create({
-                    topic: topic,
-                    intelligence: press.intelligence,
-                    beauty: press.beauty,
-                    appeal: press.appeal,
-                    judge: judge,
-                    candidate: candidateId
-                })
             } else if (topic === 'formal') {
-                await pb.collection('Scores').create({
-                    topic: topic,
-                    attire: formal.attire,
-                    presence: formal.presence,
-                    poise: formal.poise,
-                    judge: judge,
-                    candidate: candidateId
-                })
+                try {
+                    setLoading(true)
+                    onSubmit(data)
+                    await pb.collection('Scores').create({
+                        topic: topic,
+                        subtopic: "attire",
+                        score: data.formalattire,
+                        judge: judge,
+                        candidate: candidateId
+                    })
+                    await pb.collection('Scores').create({
+                        topic: topic,
+                        subtopic: "presence",
+                        score: data.formalpresence,
+                        judge: judge,
+                        candidate: candidateId
+                    })
+                    await pb.collection('Scores').create({
+                        topic: topic,
+                        subtopic: "poise",
+                        score: data.formalpoise,
+                        judge: judge,
+                        candidate: candidateId
+                    })
+                    setLoading(false)
+                    submitState(data)
+                } catch (error) {
+                    console.log(error);
+                    setLoading(false)
+                }
             } else if (topic === 'question') {
-                await pb.collection('Scores').create({
-                    topic: topic,
-                    intelligence: question.intelligence,
-                    poise: question.poise,
-                    judge: judge,
-                    candidate: candidateId
-                })
+                try {
+                    setLoading(true)
+                    onSubmit(data)
+                    await pb.collection('Scores').create({
+                        topic: topic,
+                        subtopic: "intelligence",
+                        score: data.questionintelligence,
+                        judge: judge,
+                        candidate: candidateId
+                    })
+                    await pb.collection('Scores').create({
+                        topic: topic,
+                        subtopic: "poise",
+                        score: data.questionpoise,
+                        judge: judge,
+                        candidate: candidateId
+                    })
+                    setLoading(false)
+                    submitState(data)
+                } catch (error) {
+                    console.log(error);
+                    setLoading(false)
+                }
             }
 
         } catch (error) {
@@ -162,42 +189,39 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
                 {/* <h3 className='font-semibold text-xl'>{candidateNum}</h3> */}
                 {/* <h3>{candidateId}</h3> */}
             </div>
-            {localStorage.getItem('judge') === judge && localStorage.getItem(topic + candidateNum + candidateGender) === candidateId ? (<div className='flex gap-32' >Submitted! {localStorage.getItem(`${topic + candidateNum + candidateGender}score`).split(" ").map((num, i) => (
+            {localStorage.getItem('judge') === judge && localStorage.getItem(topic + candidateNum + candidateGender) === candidateId ? (<div className='flex gap-32' >{localStorage.getItem(`${topic + candidateNum + candidateGender}score`).split(" ").map((num, i) => (
                 <span key={i}>{num}% </span>
-            ))}</div>) : (<div className='flex gap-4'>
-                {topic === 'talent' ? (
-                    <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-5'>
-                        <input className={`border-2 relative w-52 p-3 text-md font-bold rounded-3xl ${errors.talentperformance && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Performance 0 - 60%' {...register("talentperformance", { required: true, max: 60, min: 0, maxLength: 2 })} />
+            ))} <p className='font-bold uppercase'>Submitted!</p></div>) : (<div className='flex gap-4'>
+                {topic === 'swimwear' ? (
+                    <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-4'>
+                        <input className={`border-2 relative w-52 p-3 text-md font-bold rounded-3xl ${errors.swimwearbeauty && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Beauty of Figure 0 - 15%' {...register("swimwearbeauty", { required: true, max: 15, min: 0, maxLength: 2 })} />
 
-                        <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.talentmaterial && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Material 0 - 30%' {...register("talentmaterial", { required: true, max: 30, min: 0, maxLength: 2 })} />
+                        <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.swimwearpresence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence 0 - 5%' {...register("swimwearpresence", { required: true, max: 5, min: 0, maxLength: 1 })} />
 
-                        <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.talentimpact && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Impact 0-10%' {...register("talentimpact", { required: true, max: 10, min: 0, maxLength: 2 })} />
+                        <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.swimwearpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Poise and Bearing' {...register("swimwearpoise", { required: true, max: 5, min: 0, maxLength: 1 })} />
 
-                        {submit === false && confirm === false ? (<button onClick={beforeSubmit} className='px-5 rounded-full bg-blue-400 text-xl text-center font-bold text-white cursor-pointer hover:bg-blue-300'>Submit</button>) : (<input className={`px-5 rounded-full bg-red-400 text-xl font-bold text-white cursor-pointer disabled:opacity-70 hover:bg-red-300 ${loading && "animate-spin"}`} disabled={loading} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("talentperformance") || 0) + parseInt(watch("talentmaterial") || 0) + parseInt(watch("talentimpact") || 0)}%`} />)}
+                        {submit === false && confirm === false ? (<button onClick={beforeSubmit} className='px-5 rounded-full bg-blue-400 text-xl text-center font-bold text-white cursor-pointer hover:bg-blue-300'>Submit</button>) : (<input className={`px-5 rounded-full bg-red-400 text-xl font-bold text-white cursor-pointer disabled:opacity-70 hover:bg-red-300 ${loading && "animate-spin"}`} disabled={loading} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("swimwearbeauty") || 0) + parseInt(watch("swimwearpresence") || 0) + parseInt(watch("swimwearpoise") || 0)}%`} />)}
                     </form>
-                ) : topic === 'swimwear' ? (
-                    <div className='flex gap-5'>
-                        <input className='border-2 p-3 text-md font-bold rounded-3xl' type="number" placeholder='Beauty of Figure' />
-                        <input className='border-2 p-3 text-md font-bold rounded-3xl' type="number" placeholder='Stage Presence' />
-                        <input className='border-2 p-3 text-md font-bold rounded-3xl' type="number" placeholder='Poise and Bearing' />
-                    </div>
-                ) : topic === 'press' ? (
-                    <>
-                        <input className='border-2 p-3 text-md font-bold rounded-3xl' type="number" placeholder='Intelligence, wit, and style of delivery ' />
-                        <input className='border-2 p-3 text-md font-bold rounded-3xl' type="number" placeholder='Beauty, poise, and appearance' />
-                        <input className='border-2 p-3 text-md font-bold rounded-3xl' type="number" placeholder='Audience Appeal' />
-                    </>
                 ) : topic === 'formal' ? (
                     <>
-                        <input className='border-2 p-3 text-md font-bold rounded-3xl' type="number" placeholder='Attire and Carriage, Personality ' />
-                        <input className='border-2 p-3 text-md font-bold rounded-3xl' type="number" placeholder='Stage Presence' />
-                        <input className='border-2 p-3 text-md font-bold rounded-3xl' type="number" placeholder='Poise and Bearing ' />
+                        <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-4'>
+                            <input className={`border-2 relative w-52 p-3 text-md font-bold rounded-3xl ${errors.formalattire && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Attire and Carriage 0-15%' {...register("formalattire", { required: true, max: 15, min: 0, maxLength: 2 })} />
+
+                            <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.formalpresence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence 0 - 5%' {...register("formalpresence", { required: true, max: 5, min: 0, maxLength: 1 })} />
+
+                            <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.formalpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Poise and Bearing' {...register("formalpoise", { required: true, max: 5, min: 0, maxLength: 1 })} />
+
+                            {submit === false && confirm === false ? (<button onClick={beforeSubmit} className='px-5 rounded-full bg-blue-400 text-xl text-center font-bold text-white cursor-pointer hover:bg-blue-300'>Submit</button>) : (<input className={`px-5 rounded-full bg-red-400 text-xl font-bold text-white cursor-pointer disabled:opacity-70 hover:bg-red-300 ${loading && "animate-spin"}`} disabled={loading} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("formalattire") || 0) + parseInt(watch("formalpresence") || 0) + parseInt(watch("formalpoise") || 0)}%`} />)}
+                        </form>
                     </>
                 ) : topic === 'question' ? (
-                    <div className='flex gap-4'>
-                        <input className='border-2 p-3 text-md font-bold rounded-3xl' type="number" placeholder='Intelligence' />
-                        <input className='border-2 p-3 text-md font-bold rounded-3xl' type="number" placeholder='Poise and Personality' />
-                    </div>
+                    <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-4'>
+                        <input className={`border-2 relative w-52 p-3 text-md font-bold rounded-3xl ${errors.questionintelligence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Beauty of Figure 0 - 15%' {...register("questionintelligence", { required: true, max: 25, min: 0, maxLength: 2 })} />
+
+                        <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.questionpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence 0 - 5%' {...register("questionpoise", { required: true, max: 25, min: 0, maxLength: 2 })} />
+
+                        {submit === false && confirm === false ? (<button onClick={beforeSubmit} className='px-5 rounded-full bg-blue-400 text-xl text-center font-bold text-white cursor-pointer hover:bg-blue-300'>Submit</button>) : (<input className={`px-5 rounded-full bg-red-400 text-xl font-bold text-white cursor-pointer disabled:opacity-70 hover:bg-red-300 ${loading && "animate-spin"}`} disabled={loading} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("questionintelligence") || 0) + parseInt(watch("questionpoise") || 0)}%`} />)}
+                    </form>
                 ) : 'no topic'}
             </div>)}
         </div>
