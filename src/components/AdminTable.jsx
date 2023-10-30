@@ -44,8 +44,8 @@ function AdminTable({ judgeId, topic }) {
                     <tr>
                         <th className="px-4 py-2">Name</th>
                         <th className="px-4 py-2">Score</th>
-                        <th className="px-4 py-2">Topic</th>
-                        <th className="px-4 py-2">Subtopic</th>
+                        <th className="px-4 py-2">Criterion</th>
+                        <th className="px-4 py-2">Subcriterion</th>
                     </tr>
                 </thead>
                 <tbody>
