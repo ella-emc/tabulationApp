@@ -8,7 +8,7 @@ function Footer(props) {
                     <div className="flex w-[571px] max-w-full items-start gap-3.5 ml-6 self-start max-md:flex-wrap">
                         <img
                             loading="lazy"
-                            src="/public/img/mmbu23_logo.png"
+                            src="/img/mmbu23_logo.png"
                             className="aspect-[1.1] object-contain object-center w-[109px] overflow-hidden self-stretch max-w-full"
                             alt="Logo"
                         />
@@ -26,12 +26,12 @@ function Footer(props) {
                         </p>
                         <img
                             loading="lazy"
-                            src="/public/img/usc_logo.png" className="aspect-[1.15] object-contain object-center w-[86px] bg-blend-lighten overflow-hidden self-stretch max-w-full"
+                            src="/img/usc_logo.png" className="aspect-[1.15] object-contain object-center w-[86px] bg-blend-lighten overflow-hidden self-stretch max-w-full"
                             alt="Image 1"
                         />
                         <img
                             loading="lazy"
-                            src="/public/img/gdsc_logover2.png" className="aspect-[1.0] object-contain object-center w-[87px] overflow-hidden self-center max-w-full my-auto"
+                            src="/img/gdsc_logover2.png" className="aspect-[1.0] object-contain object-center w-[87px] overflow-hidden self-center max-w-full my-auto"
                             alt="Image 2"
                         />
                     </div>

@@ -36,7 +36,7 @@ function HomeMenu() {
                 >
                     <motion.div layout className=' aspect-auto w-1/2 flex flex-col items-center'>
                         <motion.img
-                            className='object-fit w-1/4 mb-4' src="/public/img/mmbu23_logo.png" alt="mmbu-logo"
+                            className='object-fit w-1/4 mb-4' src="/img/mmbu23_logo.png" alt="mmbu-logo"
                             initial={{ opacity: 0, y: -500, rotateY: 360 }}
                             animate={{ opacity: 1, y: 0, rotateY: 0 }} transition={{ duration: 3.5, type: "spring" }}
                         />
