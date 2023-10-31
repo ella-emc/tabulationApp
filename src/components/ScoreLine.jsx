@@ -194,9 +194,9 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
             ))} <p className='font-bold uppercase'>Submitted!</p></div>) : (<div className='flex gap-4'>
                 {topic === 'swimwear' ? (
                     <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-4'>
-                        <input className={`border-2 relative w-52 p-3 text-md font-bold rounded-3xl ${errors.swimwearbeauty && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Beauty of Figure 0 - 15%' {...register("swimwearbeauty", { required: true, max: 15, min: 0, maxLength: 2 })} />
+                        <input className={`border-2 relative w-52 p-3 text-md font-bold rounded-3xl ${errors.swimwearbeauty && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Beauty of Figure' {...register("swimwearbeauty", { required: true, max: 15, min: 0, maxLength: 2 })} />
 
-                        <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.swimwearpresence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence 0 - 5%' {...register("swimwearpresence", { required: true, max: 5, min: 0, maxLength: 1 })} />
+                        <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.swimwearpresence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence' {...register("swimwearpresence", { required: true, max: 5, min: 0, maxLength: 1 })} />
 
                         <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.swimwearpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Poise and Bearing' {...register("swimwearpoise", { required: true, max: 5, min: 0, maxLength: 1 })} />
 
@@ -205,9 +205,9 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
                 ) : topic === 'formal' ? (
                     <>
                         <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-4'>
-                            <input className={`border-2 relative w-52 p-3 text-md font-bold rounded-3xl ${errors.formalattire && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Attire and Carriage 0-15%' {...register("formalattire", { required: true, max: 15, min: 0, maxLength: 2 })} />
+                            <input className={`border-2 relative w-52 p-3 text-md font-bold rounded-3xl ${errors.formalattire && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Attire and Carriage' {...register("formalattire", { required: true, max: 15, min: 0, maxLength: 2 })} />
 
-                            <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.formalpresence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence 0 - 5%' {...register("formalpresence", { required: true, max: 5, min: 0, maxLength: 1 })} />
+                            <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.formalpresence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence' {...register("formalpresence", { required: true, max: 5, min: 0, maxLength: 1 })} />
 
                             <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.formalpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Poise and Bearing' {...register("formalpoise", { required: true, max: 5, min: 0, maxLength: 1 })} />
 
@@ -216,9 +216,9 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
                     </>
                 ) : topic === 'question' ? (
                     <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-4'>
-                        <input className={`border-2 relative w-52 p-3 text-md font-bold rounded-3xl ${errors.questionintelligence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Beauty of Figure 0 - 15%' {...register("questionintelligence", { required: true, max: 25, min: 0, maxLength: 2 })} />
+                        <input className={`border-2 relative w-52 p-3 text-md font-bold rounded-3xl ${errors.questionintelligence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Beauty of Figure' {...register("questionintelligence", { required: true, max: 25, min: 0, maxLength: 2 })} />
 
-                        <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.questionpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence 0 - 5%' {...register("questionpoise", { required: true, max: 25, min: 0, maxLength: 2 })} />
+                        <input className={`border-2 w-52 relative p-3 text-md font-bold rounded-3xl ${errors.questionpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence' {...register("questionpoise", { required: true, max: 25, min: 0, maxLength: 2 })} />
 
                         {submit === false && confirm === false ? (<button onClick={beforeSubmit} className='px-5 rounded-full bg-blue-400 text-xl text-center font-bold text-white cursor-pointer hover:bg-blue-300'>Submit</button>) : (<input className={`px-5 rounded-full bg-red-400 text-xl font-bold text-white cursor-pointer disabled:opacity-70 hover:bg-red-300 ${loading && "animate-spin"}`} disabled={loading} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("questionintelligence") || 0) + parseInt(watch("questionpoise") || 0)}%`} />)}
                     </form>

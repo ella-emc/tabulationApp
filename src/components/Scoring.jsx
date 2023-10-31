@@ -89,25 +89,25 @@ function Scoring() {
                             <tr className='flex gap-20'>
                                 <th className='mr-8'>Candidates</th>
                                 {/* <th>Scores</th> */}
-                                <th>Beauty of Figure</th>
-                                <th>Stage Presence</th>
-                                <th>Poise and Bearing</th>
+                                <th>Beauty of Figure 0 - 15%</th>
+                                <th>Stage Presence 0 - 5%</th>
+                                <th>Poise and Bearing 0 - 5%</th>
                             </tr>
 
                         ) : topics === 'formal' ? (
                             <tr className='flex gap-20'>
                                 <th className='mr-8'>Candidates</th>
                                 {/* <th>Scores</th> */}
-                                <th>Attire and Carriage</th>
-                                <th>Stage Presence</th>
-                                <th>Poise and Bearing</th>
+                                <th>Attire and Carriage 0 - 15%</th>
+                                <th>Stage Presence 0 - 5%</th>
+                                <th>Poise and Bearing 0 - 5%</th>
                             </tr>
                         ) : topics === 'question' ? (
                             <tr className='flex gap-20'>
                                 <th className='mr-8'>Candidates</th>
                                 {/* <th>Scores</th> */}
-                                <th>Intelligence</th>
-                                <th>Poise and Personality</th>
+                                <th>Intelligence 0 - 25%</th>
+                                <th>Poise and Personality 0 - 25%</th>
                             </tr>
                         ) : (<tr><th>not found</th></tr>)}
 
