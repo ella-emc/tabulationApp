@@ -31,7 +31,7 @@ function HomeMenu() {
         <div className="overflow-x-hidden">
             <div className="w-screen h-[95vh] flex justify-center items-center">
                 <motion.div
-                    layout
+
                     className="flex flex-col gap-16 justify-center items-center rounded-3xl"
                 >
                     <motion.div layout className=' aspect-auto w-1/2 flex flex-col items-center'>
@@ -113,11 +113,11 @@ function HomeMenu() {
 
 
                 <div className='flex items-center overflow-hidden'>
-                    <motion.h1
+                    <h1
                         className='absolute text-center animate-pulse'
                     >
                         The Search for Mr. and Ms. Bicol University 2023
-                    </motion.h1>
+                    </h1>
                 </div>
 
 
