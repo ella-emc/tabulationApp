@@ -72,10 +72,10 @@ function HomeMenu() {
                     )}
 
                     <motion.div layout className="flex gap-10">
-                        <motion.h2 initial={{ y: 500 }} animate={{ y: 0 }} transition={{ duration: 1.5, type: "spring" }} onClick={() => setPicked("closed")} className={`text-xl bg-white text-center font-normal shadow-2xl px-6 py-2 w-72 rounded-xl ${picked === "closed" && "bg-[#FBB040] text-white"} cursor-pointer hover:outline-[#FBB040] hover:outline`}>
+                        <motion.h2 initial={{ y: 500 }} animate={{ y: 0 }} transition={{ duration: 1.5, type: "spring" }} onClick={() => setPicked("closed")} className={`text-xl bg-white text-center font-normal shadow-2xl px-6 py-2 w-72 rounded-xl ${picked === "closed" && "bg-yellow-500 text-white"} cursor-pointer hover:outline-[#FBB040] hover:outline`}>
                             Closed-Door Interview
                         </motion.h2>
-                        <motion.h2 initial={{ y: 500 }} animate={{ y: 0 }} transition={{ duration: 1.5, type: "spring" }} onClick={() => setPicked("coronation")} className={`text-xl bg-white  text-center font-normal shadow-xl px-6 py-2 w-72 rounded-xl ${picked === "coronation" && "bg-[#FBB040] text-white"} cursor-pointer hover:outline-[#FBB040] hover:outline`}>
+                        <motion.h2 initial={{ y: 500 }} animate={{ y: 0 }} transition={{ duration: 1.5, type: "spring" }} onClick={() => setPicked("coronation")} className={`text-xl bg-white  text-center font-normal shadow-xl px-6 py-2 w-72 rounded-xl ${picked === "coronation" && " bg-yellow-500 text-white"} cursor-pointer hover:outline-[#FBB040] hover:outline`}>
                             Coronation Night
                         </motion.h2>
                     </motion.div>
