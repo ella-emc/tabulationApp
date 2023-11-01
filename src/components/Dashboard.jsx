@@ -47,15 +47,15 @@ function Dashboard() {
     }
 
     return (
-        <div className="flex overflow-hidden flex-col gap-10 w-[80vw] h-[80vh] justify-center items-center bg-white rounded-3xl">
-            <h1 className="text-4xl font-bold uppercase">Dashboard</h1>
+        <div className="flex overflow-hidden flex-col gap-10 w-[80vw] h-[80vh] justify-center items-center bg-white rounded-3xl ">
+            <h1 className="text-4xl font-bold uppercase pt-9">Dashboard</h1>
             <div className='flex gap-10'>
-                <div onClick={getToggle} className={`w-40 h-20 cursor-pointer rounded-full flex items-center transition-all shadow-[0px_4px_16px_rgba(20,20,26,0.1),_0px_8px_24px_rgba(20,20,26,0.1),_0px_16px_56px_rgba(20,20,26,0.1)]`}>
+                <div onClick={getToggle} className={`w-40 h-20 cursor-pointer rounded-full border-2 border-black flex items-center transition-all`}>
                     <div className={`w-16 h-16 mx-1 flex justify-center items-center bg-blue-300 rounded-full ${toggle && "translate-x-20 bg-red-300"} transition-all`}>
-                        {loading ? (<h1 className='font-bold text-3xl text-white animate-spin'>O</h1>) : toggle ? (<h1 className='font-bold text-3xl text-white'>X</h1>) : (<h1 className='font-bold text-white text-3xl'>O</h1>)}
+                        {loading ? (<h1 className='font-bold text-3xl animate-spin'>C</h1>) : toggle ? (<h1 className='font-bold text-3xl'>X</h1>) : (<h1 className='font-bold text-3xl'>O</h1>)}
                     </div>
                 </div>
-                <select onChange={(e) => getTopic(e.target.value)} className='bg-blue-100 px-4 w-auto text-2xl font-regular rounded-xl text-center' name="topic" id="topic">
+                <select onChange={(e) => getTopic(e.target.value)} className='bg-blue-100 px-4 w-auto text-2xl font-bold rounded-xl text-center' name="topic" id="topic">
                     <option value="swimwear">Swimwear Competition</option>
                     <option value="formal">Formal Attire</option>
                     <option value="question">Question and Answer</option>
@@ -66,6 +66,9 @@ function Dashboard() {
                     ))}
                 </select>
             </div>
+            <a href="/adminview/dashboard/fullresults">
+                <p className='bg-fuchsia-300 px-4 py-3 rounded-full text-white'>go to overall results</p>
+            </a>
             <div className='flex w-full h-3/4 bg-gray-200 overflow-scroll'>
                 <AdminTable topic={topic} judgeId={pickedJudge} />
             </div>
