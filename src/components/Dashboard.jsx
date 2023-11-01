@@ -50,9 +50,9 @@ function Dashboard() {
         <div className="flex overflow-hidden flex-col gap-10 w-[80vw] h-[80vh] justify-center items-center bg-white rounded-3xl ">
             <h1 className="text-4xl font-bold uppercase pt-9">Dashboard</h1>
             <div className='flex gap-10'>
-                <div onClick={getToggle} className={`w-40 h-20 cursor-pointer rounded-full border-2 border-purple-900 flex items-center transition-all`}>
+                <div onClick={getToggle} className={`w-40 h-20 cursor-pointer rounded-full border-2 border-fuchsia-900 flex items-center transition-all`}>
                     <div className={`w-16 h-16 mx-1 flex justify-center items-center bg-blue-300 rounded-full ${toggle && "translate-x-20 bg-red-300"} transition-all`}>
-                        {loading ? (<h1 className='font-bold text-3xl animate-spin text-purple-900'>c</h1>) : toggle ? (<h1 className='font-bold text-3xl text-red-900'>x</h1>) : (<h1 className='font-bold text-3xl text-blue-900'>o</h1>)}
+                        {loading ? (<h1 className='font-bold text-3xl animate-spin text-fuchsia-900'>C</h1>) : toggle ? (<h1 className='font-bold text-3xl text-red-900'>X</h1>) : (<h1 className='font-bold text-3xl text-blue-900'>O</h1>)}
                     </div>
                 </div>
                 <select onChange={(e) => getTopic(e.target.value)} className='bg-blue-100 px-4 w-auto text-2xl font-bold rounded-xl text-center border-none' name="topic" id="topic">
