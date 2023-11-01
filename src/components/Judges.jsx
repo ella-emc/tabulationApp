@@ -71,7 +71,7 @@ function Judge() {
     return (
         <>
 
-            <div className="w-full h-screen absolute flex justify-center items-center">
+            <div className={`w-full h-screen absolute flex justify-center items-center ${lock && "pointer-events-none"}`}>
                 <motion.div animate={{ scale: lock ? 1.5 : 1 }} transition={{ duration: 1.5, type: "spring" }} className="w-full h-screen  fixed border-[8rem] overflow-hidden border-[#FEBDF6]">
                     <motion.div animate={{ y: lock ? 1000 : 0 }} transition={{ duration: 1, type: "tween" }} className="absolute w-full h-full bg-black opacity-60"></motion.div>
 
@@ -96,7 +96,7 @@ function Judge() {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="text-white hidden group-hover:block w-10 h-10 absolute top-[-2rem] ml-[9rem] animate-bounce">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
                                 </svg>
-
+                                <p className='text-black p-5 text-justify hidden group-hover:block'>The fun is yet to begin...<br /> please reach to the staffs  behind you for assistance and troubleshooting or other concerns.</p>
                             </div>
                         </div>
 
@@ -105,13 +105,18 @@ function Judge() {
 
             </div>
             <Toaster />
-            <div className='flex w-full h-screen justify-center items-center'>
-                <div className='flex flex-col items-center justify-center p-10 gap-10 w-[80vw] h-[70vh] bg-white rounded-2xl'>
-                    <h1 className='text-3xl font-bold uppercase'>Enter the key</h1>
-                    <input onChange={(e) => setKey(e.target.value)} className='w-[50vw] h-[10vh] border-4 border-black rounded-2xl text-5xl' type="password" required={true} />
-                    <p className='opacity-20'>{key}</p>
-                    <button onClick={() => Login()} className='w-[20vw] h-[10vh] bg-blue-400 text-white text-4xl font-bold rounded-2xl hover:opacity-80'>Submit</button>
-                </div>
+            <div className='flex w-full h-screen justify-center items-center '>
+                <motion.div className='bg-fuchsia-300 w-[88vw] h-[83vh] rounded-2xl shadow-2xl flex justify-center items-center'>
+                    <motion.div layout className='flex flex-col items-center justify-center p-10 gap-10 w-[85vw] h-[80vh] bg-pink-100 rounded-2xl'>
+                        <AnimatePresence>
+                            {lock && (<motion.img initial={{ y: -500, rotateX: 360 }} animate={{ y: 0, rotateX: 360 }} exit={{ y: 1000 }} transition={{ duration: 2, type: "spring" }} className='object-contain w-1/4' src="/img/mmbu23_logo.png" alt="mmbu-logo" />)}
+                        </AnimatePresence>
+                        <motion.h1 className='text-3xl font-bold uppercase'>Enter the key</motion.h1>
+                        <motion.input onChange={(e) => setKey(e.target.value)} className='w-[50vw] h-[10vh] border-4 border-pink-300 rounded-2xl text-5xl' type="password" required={true} />
+                        <motion.p className='opacity-20'>{key}</motion.p>
+                        <motion.button onClick={() => Login()} className='w-[20vw] h-[10vh] bg-white shadow-2xl text-black text-4xl font-bold rounded-2xl hover:opacity-80'>Submit</motion.button>
+                    </motion.div>
+                </motion.div>
             </div>
         </>
     )
