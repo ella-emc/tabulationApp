@@ -10,8 +10,8 @@ function FullResult() {
     async function getFullResult() {
         try {
 
-            const result = await pb.collection('Judges').getFullList({
-                expand: "Scores(judge)"
+            const result = await pb.collection('Candidates').getFullList({
+                expand: "Scores(candidate)"
             })
             console.log(result)
         } catch (err) {
