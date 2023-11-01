@@ -66,15 +66,19 @@ function Judge() {
     return (
         <>
             {lock &&
-                (<div className="w-screen h-screen absolute flex justify-center items-center">
-                    <h1 className="text-5xl text-white font-bold absolute z-10">Please wait for the admin to unlock</h1>
-                    <div className="w-screen h-screen absolute blur-lg">
-                        <div className="w-full h-full bg-black opacity-60"></div>
+                (<div className="w-full h-screen absolute flex justify-center items-center">
+                    <div className="w-full h-screen absolute">
+                        <div className="w-full h-full bg-white opacity-95"></div>
                     </div>
-                </div>)}
+                    <h1 className="text-4xl text-black font-bold absolute z-10">Please wait for the admin to unlock</h1>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className='absolute top-52 z-10 w-20'>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                    </svg>
+
+                </div>)} 
             <Toaster />
-            <div className='flex w-screen h-screen justify-center items-center bg-blue-400'>
-                <div className='flex flex-col items-center justify-center p-10 gap-10 w-[80vw] h-[70vh] bg-white rounded-2xl'>
+            <div className='flex w-full h-screen justify-center items-center bg-blue-400'>
+                    <div className='flex flex-col items-center justify-center p-10 gap-10 w-[80vw] h-[70vh] bg-white rounded-2xl'>
                     <h1 className='text-3xl font-bold uppercase'>Enter the key</h1>
                     <input onChange={(e) => setKey(e.target.value)} className='w-[50vw] h-[10vh] border-4 border-black rounded-2xl text-5xl' type="password" required={true} />
                     <p className='opacity-20'>{key}</p>
