@@ -49,20 +49,20 @@ function AdminTable({ judgeId, topic }) {
 
 
     return (
-        <div>
+        <div className='bg-white'>
             <Toaster />
             {/* {judgeId + " " + topic} */}
-            <div onClick={() => getAdmin()} className='[&::-webkit-scrollbar]:hidden absolute w-40 h-16 border-t-0 top-0 left-5 text-2xl cursor-pointer border-2 border-purple-600 rounded-b-3xl bg-blue-100 text-center font-bold text-purple-900 flex place-content-evenly items-center ps-2'>
+            <div onClick={() => getAdmin()} className='[&::-webkit-scrollbar]:hidden absolute w-40 h-16 border-t-0 top-0 left-5 text-2xl cursor-pointer shadow-md rounded-b-3xl bg-white text-center font-bold text-purple-900 flex place-content-evenly items-center ps-2'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                 </svg>
                 <span>Refetch</span>
             </div>
-            <table className="table-fixed w-full overflow-scroll [&::-webkit-scrollbar]:w-0">
+            <table className="rounded-2xl w-2/3 m-auto shadow-xl table-fixed overflow-scroll [&::-webkit-scrollbar]:w-0">
                 <thead>
-                    <tr className='bg-[#881497] text-white'>
+                    <tr>
                         <th className="px-4 py-2">Name</th>
-                        <th className="px-4 py-2">Subcriterion</th>
+                        <th className="">Subcriterion</th>
                         <th className="ps-4 py-2 pe-30">Total</th>
                     </tr>
                 </thead>
@@ -86,17 +86,22 @@ function AdminTable({ judgeId, topic }) {
                             const overallScore = candidateData.reduce((acc, item) => acc + item.score, 0);
                             const subcriterias = candidateData[0].subcriterias;
                             return (
-                                <tr className="bg-white border-b-2 border-blue-400" key={candidateName}>
+                                <tr className="bg-white border-b" key={candidateName}>
                                     <td className='text-center'>{candidateName}</td>
                                     <td className='py-3'>
-                                        {candidateData.map((item, index) => {
-                                            return (
-                                                <tr className=" " key={`${candidateName}-${index}`}>
-                                                    <td className='ps-28 pe-40 py-2 capitalize'>{item.subtopic}</td>
-                                                    <td className='px-9 text-center'>{item.score}</td>
-                                                </tr>
-                                            );
-                                        })}
+                                        <table>
+                                            <tbody>
+                                                {candidateData.map((item, index) => {
+                                                    return (
+                                                                <tr className="border-x w-10" key={`${candidateName}-${index}`}>
+                                                                    <td className='ps-28 pe-40 py-2 capitalize'>{item.subtopic}</td>
+                                                                    <td className='px-9 text-center'>{item.score}</td>
+                                                                </tr>
+                                                            
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
                                     </td>
                                     <td className='text-center pe-30'>{overallScore}</td>
                                 </tr>
