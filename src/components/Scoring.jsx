@@ -73,60 +73,69 @@ function Scoring() {
     return (
         <>
             <Toaster />
-            <div className='flex w-[95vw] h-[95vh] bg-white rounded-3xl p-10 flex-col'>
-                <div className="flex gap-6 mb-10">
-                    <h1 className='font-bold text-4xl'>Scoring</h1>
-                    <h2 className='text-2xl font-semibold'>Topic: {topics}</h2>
+
+            <div className='flex flex-col h-screen'>
+                <div className="flex content-center w-[75vw] my-12 bg-white rounded-3xl py-2 px-10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+                    <div className="flex gap-24 m-3">
+                        <h1 className='text-base my-1 font-normal text-gray-600'>Segment</h1>
+                        <h1 className='text-2xl font-bold capitalize'>{topics === 'swimwear' ? "Swimwear Competition" : topics === 'formal' ? "Formal Attire" : "Question and Answer"}</h1>
+                    </div>
                 </div>
-                <div className="flex gap-5">
-                    <div onClick={() => changeTab("male")} className={`px-10 text-xl cursor-pointer py-5 rounded-t-xl border-2 border-b-0 hover:bg-slate-200 ${gender === 'male' && "bg-blue-200"} `}>{loading ? <p className='animate-spin'>C</p> : "Male"}</div>
-                    <div onClick={() => changeTab("female")} className={`px-10 text-xl cursor-pointer py-5 rounded-t-xl border-2 border-b-0 hover:bg-slate-200 ${gender === 'female' && "bg-blue-200"} `}>{loading ? <p className='animate-spin'>C</p> : "Female"}</div>
-                </div>
-                <table className='flex flex-col gap-6  h-full overflow-scroll border-2 py-5'>
-                    <thead>
+                
+                <div className='flex w-[75vw] bg-white rounded-3xl p-10 flex-col shadow-[0_8px_30px_rgb(0,0,0,0.12)]'>
+                    <div className="flex gap-5">
+                        <div onClick={() => changeTab("male")} className={`px-10 text-xl cursor-pointer py-5 rounded-t-xl border-2 border-b-0 hover:bg-slate-200 ${gender === 'male' && "bg-sky-400 text-white hover:bg-sky-600"} `}>{loading ? <p className='animate-spin'>O</p> : "Male"}</div>
+                        <div onClick={() => changeTab("female")} className={`px-10 text-xl cursor-pointer py-5 rounded-t-xl border-2 border-b-0 hover:bg-slate-200 ${gender === 'female' && "bg-pink-400 text-white hover:bg-pink-600"} `}>{loading ? <p className='animate-spin'>O</p> : "Female"}</div>
+                    </div>
+                    <table className= {`flex flex-col border border-separate gap-6 h-full border-2 py-5 ${gender === 'male' ? 'shadow-2xl shadow-blue-500/20' : 'shadow-2xl shadow-pink-500/20'}`}> 
+                        <thead className='divide-x'>
 
-                        {topics === 'swimwear' ? (
-                            <tr className='flex gap-6 bg-fuchsia-900 text-white px-5 '>
-                                <th className='w-56'>Candidates</th>
-                                {/* <th>Scores</th> */}
-                                <th className='w-56'>Beauty of Figure 0 - 15%</th>
-                                <th className='w-56'>Stage Presence 0 - 5%</th>
-                                <th className='w-56'>Poise and Bearing 0 - 5%</th>
-                            </tr>
+                            {topics === 'swimwear' ? (
+                                <tr className='flex gap-6 text-black text-base'>
+                                    <th className='w-56'>Candidates</th>
+                                    {/* <th>Scores</th> */}
+                                    <th className='w-56'>Beauty of Figure (15%)</th>
+                                    <th className='w-56'>Stage Presence (5%)</th>
+                                    <th className='w-56'>Poise and Bearing (5%)</th>
+                                    <th className='w-56'>Status</th>
+                                </tr>
 
-                        ) : topics === 'formal' ? (
-                            <tr className='flex gap-6 bg-fuchsia-900 text-white px-5 '>
-                                <th className='w-56'>Candidates</th>
-                                {/* <th>Scores</th> */}
-                                <th className='w-56'>Attire and Carriage 0 - 15%</th>
-                                <th className='w-56'>Stage Presence 0 - 5%</th>
-                                <th className='w-56'>Poise and Bearing 0 - 5%</th>
-                            </tr>
-                        ) : topics === 'question' ? (
-                            <tr className='flex gap-6 bg-fuchsia-900 text-white px-5 '>
-                                <th className='w-56'>Candidates</th>
-                                {/* <th>Scores</th> */}
-                                <th className='w-56'>Intelligence 0 - 25%</th>
-                                <th className='w-56'>Poise and Personality 0 - 25%</th>
-                            </tr>
-                        ) : (<tr><th>not found</th></tr>)}
+                            ) : topics === 'formal' ? (
+                                <tr className='flex gap-6 text-black px-3 text-base'>
+                                    <th className='w-56'>Candidates</th>
+                                    {/* <th>Scores</th> */}
+                                    <th className='w-56'>Attire and Carriage (15%)</th>
+                                    <th className='w-56'>Stage Presence (5%)</th>
+                                    <th className='w-56'>Poise and Bearing (5%)</th>
+                                    <th className='w-56'>Status</th>
+                                </tr>
+                            ) : topics === 'question' ? (
+                                <tr className='flex gap-6 text-black text-lg'>
+                                    <th className='w-56'>Candidates</th>
+                                    {/* <th>Scores</th> */}
+                                    <th className='w-56'>Intelligence (25%)</th>
+                                    <th className='w-56'>Poise and Personality (25%)</th>
+                                    <th className='w-50'>Status</th>
+                                </tr>
+                            ) : (<tr><th>not found</th></tr>)}
 
-                    </thead>
+                        </thead>
 
-                    <tbody>
-                        {data.map((dat) => (
-                            <tr key={dat.id} className='uppercase place-items-center flex gap-6 px-5'>
-                                <td className='font-semibold w-56'>{dat.nameId}</td>
-                                {/* <td onClick={() => setSubmitScore(true)} className='text-center font bold bg-blue-400 rounded-2xl px-4 py-2 font-bold text-white'>Submit Scores</td> */}
-                                <td className='ps-0'>
-                                    <ScoreLine candidateGender={dat.gender} prevScore={prevScore} topic={topics} candidate={dat.Name} candidateNum={dat.nameId} candidateId={dat.id} judge={localStorage.getItem('judge')} />
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
+                        <tbody>
+                            {data.map((dat) => (
+                                <tr key={dat.id} className='uppercase place-items-center flex gap-6 px-5 border border-separate'>
+                                    <td className='font-semibold w-56'>{dat.nameId}</td>
+                                    {/* <td onClick={() => setSubmitScore(true)} className='text-center font bold bg-blue-400 rounded-2xl px-4 py-2 font-bold text-white'>Submit Scores</td> */}
+                                    <td className='ps-0'>
+                                        <ScoreLine candidateGender={dat.gender} prevScore={prevScore} topic={topics} candidate={dat.Name} candidateNum={dat.nameId} candidateId={dat.id} judge={localStorage.getItem('judge')} />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
 
-                </table>
-            </div >
+                    </table>
+                </div >
+            </div>
         </>
     )
 }
