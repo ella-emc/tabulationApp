@@ -53,10 +53,16 @@ function AdminView() {
     return (
         <>
             <Toaster />
-            <div className="flex w-[80vw] h-[80vh] bg-white rounded-3xl flex-col gap-20 justify-center items-center">
-                <input onChange={(e) => setAccount(e.target.value)} className={`w-[40vw] h-[8vh] p-10 border-2 text-2xl rounded-xl ${error.user && "border-red-400"}`} type="text" placeholder="Username" />
-                <input onChange={(e) => setPassword(e.target.value)} className={`w-[40vw] h-[8vh] p-10 border-2 text-2xl rounded-xl ${error.pass && "border-red-400"}`} type="password" placeholder="password" />
-                <button onClick={login} className="w-[40vw] h-[8vh] border-2 text-3xl rounded-xl bg-blue-200 hover:bg-blue-300">Login</button>
+            <div className="flex w-full h-full bg-fuchsia-100 flex-col justify-center items-center">
+                <img src="/img/mmbu23_logo.png" className='w-48 mb-12' alt="" srcset="" />
+                <span className='text-4xl mb-7'>Welcome, <span className='text-fuchsia-600'>Admin</span></span>
+                <div className='flex flex-col'>
+                    <span className='ms-4'>Username</span>
+                    <input onChange={(e) => setAccount(e.target.value)} className={`w-80 h-12 p-4 border-2 border-fuchsia-700 shadow-xl shadow-black-100 text-base rounded-xl ${error.user && "border-red-400"}`} type="text" placeholder="Username" />
+                    <span className='ms-4 mt-7'>Password</span>
+                    <input onChange={(e) => setPassword(e.target.value)} className={`w-80 h-12 p-4 border-2 border-fuchsia-700 shadow-xl shadow-black-100 text-base rounded-xl ${error.pass && "border-red-400"}`} type="password" placeholder="Password" />
+                </div>
+                <button onClick={login} className="w-52 h-[8vh] mt-12 border-2 text-3xl rounded-xl bg-fuchsia-800 text-white hover:bg-fuchsia-400">Login</button>
                 {account + " " + password}
             </div>
         </>

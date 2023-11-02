@@ -8,5 +8,7 @@ export default {
 			'display': ['schabo_condensed'],
 		}
 	},
-	plugins: [],
+	plugins: [
+		require('tailwindcss-3d')
+	],
 }
