@@ -216,9 +216,9 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
                     </>
                 ) : topic === 'question' ? (
                     <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-4'>
-                        <input className={`border-2 relative w-56 p-3 text-md font-bold rounded-3xl ${errors.questionintelligence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Beauty of Figure' {...register("questionintelligence", { required: true, max: 25, min: 0, maxLength: 2 })} />
+                        <input className={`border-2 relative w-56 p-3 text-md font-bold rounded-3xl ${errors.questionintelligence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Intelligence' {...register("questionintelligence", { required: true, max: 25, min: 0, maxLength: 2 })} />
 
-                        <input className={`border-2 w-56 relative p-3 text-md font-bold rounded-3xl ${errors.questionpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence' {...register("questionpoise", { required: true, max: 25, min: 0, maxLength: 2 })} />
+                        <input className={`border-2 w-56 relative p-3 text-md font-bold rounded-3xl ${errors.questionpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Poise and Personality' {...register("questionpoise", { required: true, max: 25, min: 0, maxLength: 2 })} />
 
                         {submit === false && confirm === false ? (<button onClick={beforeSubmit} className='px-5 rounded-full bg-blue-400 text-xl text-center font-bold text-white cursor-pointer hover:bg-blue-300'>Submit</button>) : (<input className={`px-5 rounded-full bg-red-400 text-xl font-bold text-white cursor-pointer disabled:opacity-70 hover:bg-red-300 ${loading && "animate-spin"}`} disabled={loading} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("questionintelligence") || 0) + parseInt(watch("questionpoise") || 0)}%`} />)}
                     </form>
