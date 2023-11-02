@@ -52,7 +52,7 @@ function AdminView() {
 
     return (
         <>
-            {/* <Toaster /> */}
+            <Toaster />
             <div className="flex w-full h-full bg-fuchsia-100 flex-col justify-center items-center">
                 <img src="/img/mmbu23_logo.png" className='w-48 mb-12' alt="" srcset="" />
                 <span className='text-4xl mb-7'>Welcome, <span className='text-fuchsia-600'>Admin</span></span>
