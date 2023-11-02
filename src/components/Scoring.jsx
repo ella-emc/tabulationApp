@@ -78,7 +78,7 @@ function Scoring() {
                 <div className="flex content-center w-[75vw] my-12 bg-white rounded-3xl py-2 px-10 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
                     <div className="flex gap-24 m-3">
                         <h1 className='text-base my-1 font-normal text-gray-600'>Segment</h1>
-                        <h1 className='text-2xl font-bold capitalize'>{topics === 'swimwear' ? "Swimwear Competition" : topics === 'formal' ? "Formal Attire" : "Question and Answer"}</h1>
+                        <h1 className='text-2xl font-bold'>{topics === 'swimwear' ? "Swimwear Competition" : topics === 'formal' ? "Formal Attire" : "Question and Answer"}</h1>
                     </div>
                 </div>
                 
@@ -88,34 +88,34 @@ function Scoring() {
                         <div onClick={() => changeTab("female")} className={`px-10 text-xl cursor-pointer py-5 rounded-t-xl border-2 border-b-0 hover:bg-slate-200 ${gender === 'female' && "bg-pink-400 text-white hover:bg-pink-600"} `}>{loading ? <p className='animate-spin'>O</p> : "Female"}</div>
                     </div>
                     <table className= {`flex flex-col border border-separate gap-6 h-full border-2 py-5 ${gender === 'male' ? 'shadow-2xl shadow-blue-500/20' : 'shadow-2xl shadow-pink-500/20'}`}> 
-                        <thead className='divide-x'>
+                        <thead>
 
                             {topics === 'swimwear' ? (
                                 <tr className='flex gap-6 text-black text-base'>
-                                    <th className='w-56'>Candidates</th>
+                                    <th className='w-72 align-self-start'>Candidates</th>
                                     {/* <th>Scores</th> */}
-                                    <th className='w-56'>Beauty of Figure (15%)</th>
-                                    <th className='w-56'>Stage Presence (5%)</th>
+                                    <th className='w-64'>Beauty of Figure (15%)</th>
+                                    <th className='w-64'>Stage Presence (5%)</th>
                                     <th className='w-56'>Poise and Bearing (5%)</th>
                                     <th className='w-56'>Status</th>
                                 </tr>
 
                             ) : topics === 'formal' ? (
                                 <tr className='flex gap-6 text-black px-3 text-base'>
-                                    <th className='w-56'>Candidates</th>
+                                    <th className='w-80 justify-self-start'>Candidates</th>
                                     {/* <th>Scores</th> */}
-                                    <th className='w-56'>Attire and Carriage (15%)</th>
-                                    <th className='w-56'>Stage Presence (5%)</th>
-                                    <th className='w-56'>Poise and Bearing (5%)</th>
+                                    <th className='w-64'>Attire and Carriage (15%)</th>
+                                    <th className='w-80'>Stage Presence (5%)</th>
+                                    <th className='w-64'>Poise and Bearing (5%)</th>
                                     <th className='w-56'>Status</th>
                                 </tr>
                             ) : topics === 'question' ? (
                                 <tr className='flex gap-6 text-black text-lg'>
                                     <th className='w-56'>Candidates</th>
                                     {/* <th>Scores</th> */}
-                                    <th className='w-56'>Intelligence (25%)</th>
-                                    <th className='w-56'>Poise and Personality (25%)</th>
-                                    <th className='w-50'>Status</th>
+                                    <th className='w-64'>Intelligence (25%)</th>
+                                    <th className='w-64'>Poise and Personality (25%)</th>
+                                    <th className='w-48'>Status</th>
                                 </tr>
                             ) : (<tr><th>not found</th></tr>)}
 
@@ -123,8 +123,8 @@ function Scoring() {
 
                         <tbody>
                             {data.map((dat) => (
-                                <tr key={dat.id} className='uppercase place-items-center flex gap-6 px-5 border border-separate'>
-                                    <td className='font-semibold w-56'>{dat.nameId}</td>
+                                <tr key={dat.id} className='uppercase place-items-center flex gap-6 px-5 border border-separate divide-x-2'>
+                                    <td className='font-semibold w-44'>{dat.nameId}</td>
                                     {/* <td onClick={() => setSubmitScore(true)} className='text-center font bold bg-blue-400 rounded-2xl px-4 py-2 font-bold text-white'>Submit Scores</td> */}
                                     <td className='ps-0'>
                                         <ScoreLine candidateGender={dat.gender} prevScore={prevScore} topic={topics} candidate={dat.Name} candidateNum={dat.nameId} candidateId={dat.id} judge={localStorage.getItem('judge')} />
