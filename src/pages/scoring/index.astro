@@ -1,9 +1,11 @@
 ---
 import Scoring from "../../components/Scoring";
 import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header";
 ---
 
 <Layout title="Scoring View">
+  <Header headerName={"MMBU Scoring"} />
   <div class="flex w-screen h-screen bg-blue-200 justify-center items-center">
     <Scoring client:visible />
   </div>
