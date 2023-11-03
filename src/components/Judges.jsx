@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 function Judge() {
     const [key, setKey] = useState('')
-    const [lock, setLock] = useState(true)
+    const [lock, setLock] = useState(false)
     const [data, setData] = useState([])
     const [timer, setTimer] = useState(new Date().toLocaleTimeString())
     const [load, setLoad] = useState(false)
