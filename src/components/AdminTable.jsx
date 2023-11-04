@@ -52,11 +52,11 @@ function AdminTable({ judgeId, topic }) {
         <div className='bg-white'>
             <Toaster />
             {/* {judgeId + " " + topic} */}
-            <div onClick={() => getAdmin()} className='[&::-webkit-scrollbar]:hidden absolute w-40 h-16 border-t-0 top-0 left-5 text-2xl cursor-pointer shadow-md rounded-b-3xl bg-white text-center font-bold text-purple-900 flex place-content-evenly items-center ps-2'>
+            <div onClick={() => getAdmin()} className='[&::-webkit-scrollbar]:hidden absolute w-40 h-16 border-t-0 top-0 right-48 text-2xl cursor-pointer shadow-md rounded-b-3xl bg-white text-center font-bold text-purple-900 flex place-content-evenly items-center ps-2'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                 </svg>
-                <span>Refetch</span>
+                <span>Reload</span>
             </div>
             <table className="rounded-2xl w-2/3 m-auto shadow-xl table-fixed overflow-scroll [&::-webkit-scrollbar]:w-0">
                 <thead>
@@ -75,6 +75,48 @@ function AdminTable({ judgeId, topic }) {
                             <td className="border px-4 py-2">{item.subtopic}</td>
                         </tr>
                     ))} */}
+                    <tr>
+                        <td></td>
+                        {Object.keys(filteredData)
+                        .map((candidateName, index) => {
+                            const candidateData = filteredData[candidateName];
+                            return (
+                                index === 0 &&
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            <tr className="bg-white border-b" key={candidateName}>
+                                                {candidateData.map((item, index) => {
+                                                    // var subtopicName = ''
+                                                    // const renameTopic = function (subtopicDb) {
+                                                    //     switch (subtopicDb) {
+                                                    //         // Attire and Carriage
+                                                    //         // Stage Presence
+                                                    //         // Poise and Bearing
+                                                    //         // Poise and Personality
+                                                    //         // Beauty of Figure
+                                                    //         // Stage Presence
+                                                    //         // Poise and Bearing
+                                                    //         case "poise":
+                                                    //             subtopicName = 'Poise and Personality'
+                                                    //             break;
+                                                    //         default:
+                                                    //             subtopicName = subtopicDb
+                                                    //     }
+                                                    //     return subtopicName;
+                                                    // }
+                                                    return (
+                                                        <td className="capitalize border-x w-44 text-center font-bold" key={`${candidateName}-${index}`}>{item.subtopic}</td>
+                                                    );
+                                                })}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            );
+                        })}
+                        <td></td>
+                    </tr>
                     {Object.keys(filteredData)
                         .sort((a, b) => {
                             const aScore = filteredData[a].reduce((acc, item) => acc + item.score, 0);
@@ -91,15 +133,13 @@ function AdminTable({ judgeId, topic }) {
                                     <td className='py-3'>
                                         <table>
                                             <tbody>
-                                                {candidateData.map((item, index) => {
-                                                    return (
-                                                                <tr className="border-x w-10" key={`${candidateName}-${index}`}>
-                                                                    <td className='ps-28 pe-40 py-2 capitalize'>{item.subtopic}</td>
-                                                                    <td className='px-9 text-center'>{item.score}</td>
-                                                                </tr>
-                                                            
-                                                    );
-                                                })}
+                                                <tr>
+                                                    {candidateData.map((item, index) => {
+                                                        return (
+                                                            <td className="border-x w-44 text-center" key={`${candidateName}-${index}`}>{item.score}</td>
+                                                        );
+                                                    })}
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </td>

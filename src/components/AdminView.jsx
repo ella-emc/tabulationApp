@@ -63,7 +63,7 @@ function AdminView() {
                     <input onChange={(e) => setPassword(e.target.value)} className={`w-80 h-12 p-4 border-2 border-fuchsia-700 shadow-xl shadow-black-100 text-base rounded-xl ${error.pass && "border-red-400"}`} type="password" placeholder="Password" />
                 </div>
                 <button onClick={login} className="w-52 h-[8vh] mt-12 border-2 text-3xl rounded-xl bg-fuchsia-800 text-white hover:bg-fuchsia-400">Login</button>
-                {account + " " + password}
+                {/* {account + " " + password} */}
             </div>
         </>
     )
