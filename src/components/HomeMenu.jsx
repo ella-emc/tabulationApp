@@ -41,7 +41,7 @@ function HomeMenu() {
                             animate={{ opacity: 1, y: 0, rotateY: 0 }} transition={{ duration: 3.5, type: "spring" }}
                         />
                         <motion.h1
-                            className='uppercase text-fuchsia-600 text-4xl text-center font-medium'
+                            className='uppercase text-fuchsia-600 text-4xl text-center font-bold'
                             variants={animate} initial="hidden" animate="visible" transition={{ staggerChildren: 0.05 }}
                         >
                             {title.map((text, index) => (
@@ -66,31 +66,31 @@ function HomeMenu() {
                     </motion.div>
 
                     {!picked && (
-                        <motion.h1 layoutId="selector" className="text-3xl font-bold" initial={{ opacity: 0, y: 500, rotateX: 360 }}
+                        <motion.h1 layoutId="selector" className="text-xl font-bold" initial={{ opacity: 0, y: 500, rotateX: 360 }}
                             animate={{ opacity: 1, y: 0, rotateX: 0 }} transition={{ duration: 2.5, type: "spring", bounce: 0.2 }}
                         >Select Event</motion.h1>
                     )}
 
                     <motion.div layout className="flex gap-10">
-                        <motion.h2 initial={{ y: 500 }} animate={{ y: 0 }} transition={{ duration: 1.5, type: "spring" }} onClick={() => setPicked("closed")} className={`text-xl bg-white text-center font-normal shadow-2xl px-6 py-2 w-72 rounded-xl ${picked === "closed" && "bg-yellow-500 text-white"} cursor-pointer hover:outline-[#FBB040] hover:outline`}>
+                        <motion.h2 initial={{ y: 500 }} animate={{ y: 0 }} transition={{ duration: 1.5, type: "spring" }} onClick={() => setPicked("closed")} className={`text-base bg-white text-center font-medium shadow-2xl px-6 py-2 w-72 rounded-xl ${picked === "closed" && "bg-yellow-500 text-white"} cursor-pointer hover:outline-[#FBB040] hover:outline`}>
                             Closed-Door Interview
                         </motion.h2>
-                        <motion.h2 initial={{ y: 500 }} animate={{ y: 0 }} transition={{ duration: 1.5, type: "spring" }} onClick={() => setPicked("coronation")} className={`text-xl bg-white  text-center font-normal shadow-xl px-6 py-2 w-72 rounded-xl ${picked === "coronation" && " bg-yellow-500 text-white"} cursor-pointer hover:outline-[#FBB040] hover:outline`}>
+                        <motion.h2 initial={{ y: 500 }} animate={{ y: 0 }} transition={{ duration: 1.5, type: "spring" }} onClick={() => setPicked("coronation")} className={`text-base bg-white text-center font-medium shadow-xl px-6 py-2 w-72 rounded-xl ${picked === "coronation" && " bg-yellow-500 text-white"} cursor-pointer hover:outline-[#FBB040] hover:outline`}>
                             Coronation Night
                         </motion.h2>
                     </motion.div>
                     {picked && (
                         <>
-                            <motion.h1 layoutId="selector" className="text-3xl font-bold">Select Interface</motion.h1>
+                            <motion.h1 layoutId="selector" className="text-xl font-bold">Select Interface</motion.h1>
                             <div className='flex gap-10'>
                                 <a href="/judges">
-                                    <motion.div initial={{ x: -500 }} animate={{ x: 0 }} transition={{ duration: 1.5, type: "spring" }} className='shadow-2xl px-6 py-2 w-60 text-center text-xl rounded-2xl cursor-pointer bg-white hover:outline-fuchsia-400 hover:outline'>
+                                    <motion.div initial={{ x: -500 }} animate={{ x: 0 }} transition={{ duration: 1.5, type: "spring" }} className='shadow-2xl font-medium px-6 py-2 w-60 text-center text-base rounded-2xl cursor-pointer bg-white hover:outline-fuchsia-400 hover:outline'>
                                         Judges
                                     </motion.div>
                                 </a>
                                 <a href="/adminview">
                                     <motion.div initial={{ x: 500 }} animate={{ x: 0 }}
-                                        transition={{ duration: 1.5, type: "spring" }} className=' shadow-2xl px-6 py-2 w-60 text-center text-xl rounded-2xl bg-white cursor-pointer hover:outline-fuchsia-400 hover:outline'>
+                                        transition={{ duration: 1.5, type: "spring" }} className=' shadow-2xl px-6 py-2 w-60 text-center font-medium text-base rounded-2xl bg-white cursor-pointer hover:outline-fuchsia-400 hover:outline'>
                                         Admin
                                     </motion.div>
                                 </a>
