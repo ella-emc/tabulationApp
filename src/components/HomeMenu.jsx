@@ -41,7 +41,7 @@ function HomeMenu() {
                             animate={{ opacity: 1, y: 0, rotateY: 0 }} transition={{ duration: 3.5, type: "spring" }}
                         />
                         <motion.h1
-                            className='uppercase text-fuchsia-600 text-4xl text-center font-bold bg-gradient-to-r from-purple-900 to-pink-500 bg-clip-text text-transparent'
+                            className='uppercase text-fuchsia-600 text-4xl text-center font-bold'
                             variants={animate} initial="hidden" animate="visible" transition={{ staggerChildren: 0.05 }}
                         >
                             {title.map((text, index) => (
