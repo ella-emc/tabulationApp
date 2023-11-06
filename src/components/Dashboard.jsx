@@ -49,21 +49,21 @@ function Dashboard() {
 
     return (
         <div className='w-full h-full bg-white'>
-            <Header/>
+            <Header headerName={"Ranking"}/>
             <div className="flex overflow-hidden flex-col gap-10 items-center">
                 <div className='flex gap-10 w-2/3 m-10 justify-between'>
                     <div className='flex flex-col gap-3'>
                         <div className='shadow-xl flex gap-20 px-5 h-14 place-items-center rounded-2xl'>
-                            <span className='w-7 text-center text-xl'>Segment</span>
-                            <select onChange={(e) => getTopic(e.target.value)} className='p-4 w-96 text-2xl uppercase font-bold rounded-xl text-center' name="topic" id="topic">
+                            <span className='w-7 text-center text-base'>Segment</span>
+                            <select onChange={(e) => getTopic(e.target.value)} className='p-4 w-96 text-base capitalize font-bold rounded-xl text-center' name="topic" id="topic">
                                 <option value="swimwear">Swimwear Competition</option>
                                 <option value="formal">Formal Attire</option>
                                 <option value="question">Question and Answer</option>
                             </select>
                         </div>
                         <div className='shadow-xl flex gap-20 px-5 h-14 place-items-center rounded-2xl'>
-                            <span className='w-7 text-center text-xl'>Judge</span> 
-                            <select onChange={(e) => setPickedJudge(e.target.value)} className='p-4 w-96 text-2xl uppercase font-bold rounded-xl text-center' name="topic" id="topic">
+                            <span className='w-7 text-center text-base'>Judge</span> 
+                            <select onChange={(e) => setPickedJudge(e.target.value)} className='p-4 w-96 text-base capitalize font-bold rounded-xl text-center' name="topic" id="topic">
                                 {judge.map((item, index) => (
                                     <option key={index} value={item.id}>{item.Name}</option>
                                 ))}
