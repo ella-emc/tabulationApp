@@ -4,9 +4,8 @@ export default {
 	theme: {
 		extend: {},
 		fontFamily: {
-			'sans': ['bahnschrift'],
-			'display': ['schabo_condensed'],
-		}
+			sans: ["Inter Variable", "Inter"]
+		},
 	},
 	plugins: [
 		require('tailwindcss-3d')
