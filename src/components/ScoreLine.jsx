@@ -26,6 +26,7 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
     const [confirm, setConfirm] = useState(false)
     const [loading, setLoading] = useState(false)
     const [datarender, setDatarender] = useState(null)
+    const [topics, setTopics] = useState('')
 
     /**
      * Redirects the user to the login page if the judge is not logged in
@@ -35,6 +36,8 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
             window.location.href = '/'
         }
     }, [])
+
+
 
     /**
      * Handles form submission for the talent topic
@@ -107,6 +110,12 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
                         topic: topic,
                         subtopic: "impact",
                         score: data.swimwearpoise,
+                        judge: judge,
+                        candidate: candidateId
+                    })
+                    await pb.collection('ScoreFinal').create({
+                        segment: topic,
+                        score: parseInt(data.swimwearpoise) + parseInt(data.swimwearpresence) + parseInt(data.swimwearbeauty),
                         judge: judge,
                         candidate: candidateId
                     })

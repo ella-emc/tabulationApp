@@ -78,43 +78,43 @@ function AdminTable({ judgeId, topic }) {
                     <tr>
                         <td></td>
                         {Object.keys(filteredData)
-                        .map((candidateName, index) => {
-                            const candidateData = filteredData[candidateName];
-                            return (
-                                index === 0 &&
-                                <td>
-                                    <table>
-                                        <tbody>
-                                            <tr className="bg-white border-b" key={candidateName}>
-                                                {candidateData.map((item, index) => {
-                                                    // var subtopicName = ''
-                                                    // const renameTopic = function (subtopicDb) {
-                                                    //     switch (subtopicDb) {
-                                                    //         // Attire and Carriage
-                                                    //         // Stage Presence
-                                                    //         // Poise and Bearing
-                                                    //         // Poise and Personality
-                                                    //         // Beauty of Figure
-                                                    //         // Stage Presence
-                                                    //         // Poise and Bearing
-                                                    //         case "poise":
-                                                    //             subtopicName = 'Poise and Personality'
-                                                    //             break;
-                                                    //         default:
-                                                    //             subtopicName = subtopicDb
-                                                    //     }
-                                                    //     return subtopicName;
-                                                    // }
-                                                    return (
-                                                        <td className="capitalize border-x w-44 text-center font-bold" key={`${candidateName}-${index}`}>{item.subtopic}</td>
-                                                    );
-                                                })}
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            );
-                        })}
+                            .map((candidateName, index) => {
+                                const candidateData = filteredData[candidateName];
+                                return (
+                                    index === 0 &&
+                                    <td>
+                                        <table>
+                                            <tbody>
+                                                <tr className="bg-white border-b" key={candidateName}>
+                                                    {candidateData.map((item, index) => {
+                                                        // var subtopicName = ''
+                                                        // const renameTopic = function (subtopicDb) {
+                                                        //     switch (subtopicDb) {
+                                                        //         // Attire and Carriage
+                                                        //         // Stage Presence
+                                                        //         // Poise and Bearing
+                                                        //         // Poise and Personality
+                                                        //         // Beauty of Figure
+                                                        //         // Stage Presence
+                                                        //         // Poise and Bearing
+                                                        //         case "poise":
+                                                        //             subtopicName = 'Poise and Personality'
+                                                        //             break;
+                                                        //         default:
+                                                        //             subtopicName = subtopicDb
+                                                        //     }
+                                                        //     return subtopicName;
+                                                        // }
+                                                        return (
+                                                            <td className="capitalize border-x w-44 text-center font-bold" key={`${candidateName}-${index}`}>{item.subtopic}</td>
+                                                        );
+                                                    })}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                );
+                            })}
                         <td></td>
                     </tr>
                     {Object.keys(filteredData)
@@ -128,7 +128,7 @@ function AdminTable({ judgeId, topic }) {
                             const overallScore = candidateData.reduce((acc, item) => acc + item.score, 0);
                             const subcriterias = candidateData[0].subcriterias;
                             return (
-                                <tr className="bg-white border-b" key={candidateName}>
+                                <tr className="bg-white border-b" key={index}>
                                     <td className='text-center'>{candidateName}</td>
                                     <td className='py-3'>
                                         <table>
