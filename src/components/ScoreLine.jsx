@@ -1,8 +1,10 @@
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { pb } from '../pocketbase'
-import { set, useForm } from 'react-hook-form';
-
+import { useForm } from 'react-hook-form';
+import { Form, Formik } from 'formik';
+import Input from './Input';
+import { motion } from "framer-motion"
 /**
  * ScoreLine component that displays the score form for a candidate in a specific topic
  * @param {Object} props - Component props
@@ -16,6 +18,10 @@ import { set, useForm } from 'react-hook-form';
  * @returns {JSX.Element} - The ScoreLine component
  */
 function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevScore, candidateGender }) {
+
+    const [isLocked, setIsLocked] = useState(false);
+
+
     const [talent, setTalent] = useState({ performance: '', material: '', impact: '' })
     const [swimwear, setSwimwear] = useState({ beauty: '', presence: '', poise: '' })
     const [press, setPress] = useState({ intelligence: '', beauty: '', appeal: '' })
@@ -202,18 +208,34 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
                 <span className='w-56 text-center' key={i}>{num}% </span>
             ))} <p className='font-bold uppercase text-green-600'>Submitted!</p></div>) : (<div className='flex gap-4'>
                 {topic === 'swimwear' ? (
-                    <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-6'>
-                        <input className={`border-2 relative w-52 p-3 text-md font-medium rounded-3xl ${errors.swimwearbeauty && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Beauty of Figure' {...register("swimwearbeauty", { required: true, max: 15, min: 0, maxLength: 2 })} />
+                    <Formik initialValues={{
+                        BOF: "",
+                        SP: "",
+                        PAB: "",
+                    }}
+                        onSubmit={(value, action) => {
+                            if(!isLocked){
+                                setIsLocked(true)
+                                return;
+                            }
+                            console.log(value)
+                            action.resetForm();
+                            setIsLocked(false)
+                        }}
 
-                        <input className={`border-2 w-52 relative p-3 text-md font-medium rounded-3xl ${errors.swimwearpresence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence' {...register("swimwearpresence", { required: true, max: 5, min: 0, maxLength: 1 })} />
+                    >
+                        <Form className='grid grid-cols-4 gap-4'>
+                            <Input type="number" name="BOF" placeholder="Beauty of Figure" disabled={isLocked} />
+                            <Input type="number" name="SP" placeholder="Stage Presence" disabled={isLocked} />
+                            <Input type="number" name="PAB" placeholder="Poise and Bearing" disabled={isLocked} />
 
-                        <input className={`border-2 w-52 relative p-3 text-md font-medium rounded-3xl ${errors.swimwearpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Poise and Bearing' {...register("swimwearpoise", { required: true, max: 5, min: 0, maxLength: 1 })} />
-
-                        {submit === false && confirm === false ? (<button onClick={beforeSubmit} className={`px-5 rounded-full text-xl text-center font-bold text-white cursor-pointer ${candidateGender === "male" ? "bg-sky-400 hover:bg-sky-300" : "bg-pink-400 hover:bg-pink-300"}`}>Submit</button>) : (<input className={`px-5 rounded-full bg-red-400 text-xl font-bold text-white cursor-pointer disabled:opacity-70 hover:bg-red-300 ${loading && "animate-spin"}`} disabled={loading} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("swimwearbeauty") || 0) + parseInt(watch("swimwearpresence") || 0) + parseInt(watch("swimwearpoise") || 0)}%`} />)}
-                    </form>
+                            <motion.button whileTap={{scale: 0.9}} type={!isLocked ? "submit" : "button"} className='border border-gray-400 bg-fuchsia-800 text-white text-lg font-bold rounded-[5px]' >{isLocked ? "Submit" : "Lock"}</motion.button>
+                        </Form>
+                    </Formik>
                 ) : topic === 'formal' ? (
                     <>
-                        <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-6'>
+                        <span>Formal</span>
+                        {/* <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-6'>
                             <input className={`border-2 relative w-52 p-3 text-md font-medium rounded-3xl ${errors.formalattire && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Attire and Carriage' {...register("formalattire", { required: true, max: 15, min: 0, maxLength: 2 })} />
 
                             <input className={`border-2 w-52 relative p-3 text-md font-medium rounded-3xl ${errors.formalpresence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Stage Presence' {...register("formalpresence", { required: true, max: 5, min: 0, maxLength: 1 })} />
@@ -221,16 +243,19 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
                             <input className={`border-2 w-52 relative p-3 text-md font-medium rounded-3xl ${errors.formalpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Poise and Bearing' {...register("formalpoise", { required: true, max: 5, min: 0, maxLength: 1 })} />
 
                             {submit === false && confirm === false ? (<button onClick={beforeSubmit} className={`px-5 rounded-full text-xl text-center font-bold text-white cursor-pointer ${candidateGender === "male" ? "bg-sky-400 hover:bg-sky-300" : "bg-pink-400 hover:bg-pink-300"}`}>Submit</button>) : (<input className={`px-5 rounded-full bg-red-400 text-xl font-bold text-white cursor-pointer disabled:opacity-70 hover:bg-red-300 ${loading && "animate-spin"}`} disabled={loading} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("formalattire") || 0) + parseInt(watch("formalpresence") || 0) + parseInt(watch("formalpoise") || 0)}%`} />)}
-                        </form>
+                        </form> */}
                     </>
                 ) : topic === 'question' ? (
-                    <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-12'>
+                    <>
+                        <span>Questio</span>
+                        {/* <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-12'>
                         <input className={`border-2 relative w-64 p-3 text-md font-medium rounded-3xl ${errors.questionintelligence && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Intelligence' {...register("questionintelligence", { required: true, max: 25, min: 0, maxLength: 2 })} />
 
                         <input className={`border-2 w-64 relative p-3 text-md font-medium rounded-3xl ${errors.questionpoise && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Poise and Personality' {...register("questionpoise", { required: true, max: 25, min: 0, maxLength: 2 })} />
 
                         {submit === false && confirm === false ? (<button onClick={beforeSubmit} className={`px-5 rounded-full text-xl text-center font-bold text-white cursor-pointer ${candidateGender === "male" ? "bg-sky-400 hover:bg-sky-300" : "bg-pink-400 hover:bg-pink-300"}`}>Submit</button>) : (<input className={`px-5 rounded-full bg-red-400 text-xl font-bold text-white cursor-pointer disabled:opacity-70 hover:bg-red-300 ${loading && "animate-spin"}`} disabled={loading} type="submit" value={loading ? "C" : `Confirm? ${parseInt(watch("questionintelligence") || 0) + parseInt(watch("questionpoise") || 0)}%`} />)}
-                    </form>
+                    </form> */}
+                    </>
                 ) : 'no topic'}
             </div>)}
         </div>
