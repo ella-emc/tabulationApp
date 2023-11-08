@@ -34,6 +34,19 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
     const [datarender, setDatarender] = useState(null)
     const [topics, setTopics] = useState('')
 
+
+
+    const handleSwimWearSubmit = (value, action) => {
+        if(!isLocked){
+            setIsLocked(true)
+            return;
+        }
+        console.log(value)
+        action.resetForm();
+        setIsLocked(false)
+    }
+
+
     /**
      * Redirects the user to the login page if the judge is not logged in
      */
@@ -52,7 +65,6 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
     const onSubmit = data => {
         setTalent({ performance: data.talentperformance, material: data.talentmaterial, impact: data.talentimpact })
         console.log(data)
-
     };
 
     /**
@@ -156,6 +168,12 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
                         judge: judge,
                         candidate: candidateId
                     })
+                    await pb.collection('ScoreFinal').create({
+                        segment: topic,
+                        score: parseInt(data.formalattire) + parseInt(data.formalpresence) + parseInt(data.formalpoise),
+                        judge: judge,
+                        candidate: candidateId
+                    })
                     setLoading(false)
                     submitState(data)
                 } catch (error) {
@@ -177,6 +195,12 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
                         topic: topic,
                         subtopic: "poise",
                         score: data.questionpoise,
+                        judge: judge,
+                        candidate: candidateId
+                    })
+                    await pb.collection('ScoreFinal').create({
+                        segment: topic,
+                        score: parseInt(data.questionintelligence) + parseInt(data.questionpoise),
                         judge: judge,
                         candidate: candidateId
                     })
@@ -209,32 +233,39 @@ function ScoreLine({ topic, judge, candidate, candidateId, candidateNum, prevSco
             ))} <p className='font-bold uppercase text-green-600'>Submitted!</p></div>) : (<div className='flex gap-4'>
                 {topic === 'swimwear' ? (
                     <Formik initialValues={{
-                        BOF: "",
-                        SP: "",
-                        PAB: "",
+                        swimwearbeauty: "",
+                        swimwearpresence: "",
+                        swimwearpoise: "",
                     }}
-                        onSubmit={(value, action) => {
-                            if(!isLocked){
-                                setIsLocked(true)
-                                return;
-                            }
-                            console.log(value)
-                            action.resetForm();
-                            setIsLocked(false)
-                        }}
+                        onSubmit={handleSwimWearSubmit}
 
                     >
                         <Form className='grid grid-cols-4 gap-4'>
-                            <Input type="number" name="BOF" placeholder="Beauty of Figure" disabled={isLocked} />
-                            <Input type="number" name="SP" placeholder="Stage Presence" disabled={isLocked} />
-                            <Input type="number" name="PAB" placeholder="Poise and Bearing" disabled={isLocked} />
+                            <Input type="number" name="swimwearbeauty" placeholder="Beauty of Figure" disabled={isLocked} />
+                            <Input type="number" name="swimwearpresence" placeholder="Stage Presence" disabled={isLocked} />
+                            <Input type="number" name="swimwearpoise" placeholder="Poise and Bearing" disabled={isLocked} />
 
-                            <motion.button whileTap={{scale: 0.9}} type={!isLocked ? "submit" : "button"} className='border border-gray-400 bg-fuchsia-800 text-white text-lg font-bold rounded-[5px]' >{isLocked ? "Submit" : "Lock"}</motion.button>
+                            <motion.button whileTap={{ scale: 0.9 }} type={!isLocked ? "submit" : "button"} className='border border-gray-400 bg-fuchsia-800 text-white text-lg font-bold rounded-[5px]' >{isLocked ? "Confirm" : "Submit"}</motion.button>
                         </Form>
                     </Formik>
                 ) : topic === 'formal' ? (
                     <>
-                        <span>Formal</span>
+                      {/* <Formik initialValues={{
+                        formalattire: "",
+                        formalpresenceSP: "",
+                        formalpoise: "",
+                    }}
+                        onSubmit={handleSwimWearSubmit}
+
+                    >
+                        <Form className='grid grid-cols-4 gap-4'>
+                            <Input type="number" name="formalattire" placeholder="Beauty of Figure" disabled={isLocked} />
+                            <Input type="number" name="SP" placeholder="Stage Presence" disabled={isLocked} />
+                            <Input type="number" name="PAB" placeholder="Poise and Bearing" disabled={isLocked} />
+
+                            <motion.button whileTap={{ scale: 0.9 }} type={!isLocked ? "submit" : "button"} className='border border-gray-400 bg-fuchsia-800 text-white text-lg font-bold rounded-[5px]' >{isLocked ? "Confirm" : "Submit"}</motion.button>
+                        </Form>
+                    </Formik> */}
                         {/* <form onSubmit={handleSubmit(submitScore)} className='flex w-fit h-14 gap-6'>
                             <input className={`border-2 relative w-52 p-3 text-md font-medium rounded-3xl ${errors.formalattire && "border-l-[2rem] border-red-400"} transition-all`} type="number" placeholder='Attire and Carriage' {...register("formalattire", { required: true, max: 15, min: 0, maxLength: 2 })} />
 
